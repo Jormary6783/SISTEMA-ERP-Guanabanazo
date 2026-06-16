@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guanabanazo ERP 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#1D9E75;--g2:#0F6E56;--g3:#E1F5EE;
+  --amber:#BA7517;--red:#A32D2D;--dark-red:#731F1F;
+  --bg:#ffffff;--bg2:#f5f5f4;--bg3:#f0efeb;
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
+  --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);
+  --radius:8px;--radius-lg:12px
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1c1c1a;--bg2:#252523;--bg3:#2e2e2b;
+  --text:#f0efe8;--text2:#b4b2a9;--text3:#888780;
+  --border:rgba(255,255,255,0.12);--border2:rgba(255,255,255,0.22)
+}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);min-height:100vh}
+
+/* --- ESTILOS DE LA PANTALLA DE LOGIN --- */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg3);
+  padding: 20px;
+}
+.login-card {
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.login-logo-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--g);
+  display: inline-block;
+  margin-right: 6px;
+}
+.login-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.login-subtitle {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+.error-message {
+  background: #FCEBEB;
+  color: #791F1F;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- CONTROL DE VISIBILIDAD --- */
+.erp{display:none;min-height:100vh} 
+
+.sidebar{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;padding:16px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{padding:0 16px 16px;border-bottom:0.5px solid var(--border);margin-bottom:12px}
+.logo-name{font-size:15px;font-weight:500}
+.logo-sub{font-size:11px;color:var(--text3)}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--g);display:inline-block;margin-right:6px}
+.nav-sec{padding:0 8px 4px;font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:10px 8px 4px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--radius);cursor:pointer;font-size:13px;color:var(--text2);margin:0 8px 2px;transition:background .15s;user-select:none;text-decoration:none}
+.nav-item:hover{background:var(--bg)}
+.nav-item.active{background:var(--bg);color:var(--text);font-weight:500}
+.nav-item.active i,.nav-item:hover i{color:var(--g)}
+.nav-item i{font-size:16px;min-width:16px}
+.main{flex:1;overflow:auto;padding:20px;min-width:0}
+
+/* Corrección de visibilidad de páginas */
+.page{display:none;}
+.page.active{display:block;}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+.metric{background:var(--bg2);border-radius:var(--radius);padding:12px 14px}
+.metric-label{font-size:11px;color:var(--text2);margin-bottom:4px}
+.metric-val{font-size:20px;font-weight:500}
+.metric-val.green{color:var(--g)}.metric-val.red{color:var(--red)}.metric-val.amber{color:var(--amber)}
+.metric-tag{font-size:10px;margin-top:2px;color:var(--text3)}
+.card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}
+.card-title{font-size:14px;font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.card-title i{font-size:16px;color:var(--g)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;font-weight:500;color:var(--text2);padding:6px 8px;border-bottom:0.5px solid var(--border)}
+td{padding:8px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+tfoot td{font-weight:600;background:var(--bg2);padding:8px}
+.badge{display:inline-flex;align-items:center;font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500}
+.badge-green{background:#E1F5EE;color:#0F6E56}
+.badge-amber{background:#FAEEDA;color:#854F0B}
+.badge-red{background:#FCEBEB;color:#791F1F}
+.badge-blue{background:#E6F1FB;color:#185FA5}
+.badge-gray{background:var(--bg2);color:var(--text3)}
+input,select,textarea{background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 10px;width:100%;outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--g)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.fr{display:flex;flex-direction:column;gap:4px}
+.fr label{font-size:11px;color:var(--text2);font-weight:500}
+.btn{border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 14px;cursor:pointer;font-size:13px;background:transparent;color:var(--text);transition:background .15s;display:inline-flex;align-items:center;gap:5px}
+.btn:hover{background:var(--bg2)}
+.btn-primary{background:var(--g);color:#fff;border-color:var(--g)}
+.btn-primary:hover{background:var(--g2);border-color:var(--g2)}
+.btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sep{height:0.5px;background:var(--border);margin:16px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--g);color:#fff;padding:10px 16px;border-radius:var(--radius);font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
+.toast.show{opacity:1}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.empty{text-align:center;padding:32px;color:var(--text3);font-size:13px}
+.srow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.srow:last-child{border-bottom:none}
+.savatar{width:32px;height:32px;border-radius:50%;background:var(--g3);color:var(--g2);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:12px;flex-shrink:0}
+.drow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.drow:last-child{border-bottom:none}
+.topbar{display:none;padding:12px 16px;background:var(--bg2);border-bottom:0.5px solid var(--border);align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:14px;font-weight:500}
+.hamburger{background:none;border:none;cursor:pointer;padding:4px;color:var(--text)}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100}
+.analysis-box{background:var(--bg2);border-radius:var(--radius);padding:12px;margin-top:8px}
+.analysis-box .ab-title{font-size:12px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.analysis-box .ab-title i{color:var(--g)}
+.analysis-box p{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* Estilos de la tabla de arqueo tipo Excel */
+.excel-table { width: 100%; border: 1.5px solid #1D9E75; font-family: inherit; margin-top: 10px; background: #fff; }
+.excel-header { background: #52D69B; color: #000; font-weight: bold; text-align: center; font-size: 14px; padding: 6px; border: 1px solid #1D9E75; }
+.excel-th { background: #52D69B; color: #000; font-weight: bold; text-align: center; border: 1px solid #1D9E75; padding: 6px; }
+.excel-td { border: 1px solid #cbd5e1; padding: 6px; color: #000; }
+.excel-td-center { text-align: center; }
+.excel-td-right { text-align: right; padding-right: 12px; }
+.excel-row-total { background: #52D69B; font-weight: bold; color: #000; }
+.excel-row-reporte { font-weight: bold; background: #f8fafc; }
+.excel-row-faltante { font-weight: bold; background: #fef2f2; color: #991b1b; }
+
+/* GRÁFICAS DE BARRAS VERTICALES */
+.v-chart{display:flex;align-items:flex-end;justify-content:space-around;height:200px;padding:10px 0 24px;border-bottom:1px solid var(--border);position:relative;margin-top:15px;gap:10px}
+.v-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end;position:relative}
+.v-bar{width:70%;max-width:45px;background:var(--g);border-radius:4px 4px 0 0;min-height:4px;transition:height 0.5s ease;position:relative;display:flex;justify-content:center}
+.v-bar-group{display:flex;gap:4px;width:100%;justify-content:center;align-items:flex-end;height:100%}
+.v-bar-item{width:22px;border-radius:3px 3px 0 0;min-height:4px;transition:height 0.5s ease;position:relative;display:flex;justify-content:center}
+.v-val{position:absolute;top:-20px;font-size:10px;font-weight:600;color:var(--text);white-space:nowrap}
+.v-col:hover .v-val { display: block; }
+.v-lbl{position:absolute;bottom:-24px;font-size:11px;color:var(--text2);text-align:center;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:200;padding:16px}
+.modal.open{display:flex}
+.modal-content{background:var(--bg);border-radius:var(--radius-lg);padding:20px;max-width:450px;width:100%;border:0.5px solid var(--border)}
+.btn-mini{padding:4px 6px;font-size:11px;border-radius:4px}
+
+@media(max-width:600px){
+  .topbar{display:flex}
+  .sidebar{position:fixed;left:-220px;top:0;bottom:0;z-index:101;transition:left .25s;width:220px;height:100vh}
+  .sidebar.open{left:0}
+  .mob-overlay.open{display:block}
+  .main{padding:12px}
+  .fg,.fg3,.two-col{grid-template-columns:1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+  .v-bar{width:85%}
+  .v-bar-item{width:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="login-container" id="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+        <span class="login-logo-dot"></span>
+        <strong style="font-size:18px;">Guanabanazo</strong>
+      </div>
+      <div class="login-title">Iniciar Sesión</div>
+      <div class="login-subtitle">Introduce tus credenciales para acceder al ERP</div>
+    </div>
+
+    <div class="error-message" id="login-error">
+      <i class="ti ti-alert-circle"></i> Usuario o contraseña incorrectos.
+    </div>
+
+    <form id="form-login" onsubmit="procesarLogin(event)">
+      <div class="fr" style="margin-bottom: 14px;">
+        <label style="margin-bottom: 4px;">Usuario</label>
+        <input type="text" id="login-user" placeholder="Ej: admin" required>
+      </div>
+      <div class="fr" style="margin-bottom: 20px;">
+        <label style="margin-bottom: 4px;">Contraseña</label>
+        <input type="password" id="login-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 9px;">
+        Entrar al Sistema <i class="ti ti-login"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="erp" id="erp-root" style="display:none; flex-direction:row;">
+<nav class="sidebar" id="sidebar">
+  <div class="logo">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+      <span class="logo-dot"></span><span class="logo-name">Guanabanazo</span>
+    </div>
+    <div class="logo-sub">ERP 2026</div>
+  </div>
+
+  <div class="nav-sec">Principal</div>
+  <a href="#" class="nav-item active" data-page="dashboard" data-title="Inicio"><i class="ti ti-home"></i>Inicio</a>
+  <a href="#" class="nav-item" data-page="reporte" data-title="Reporte mensual"><i class="ti ti-report-analytics"></i>Reporte mensual</a>
+  <a href="#" class="nav-item" data-page="informe" data-title="Informe mensual"><i class="ti ti-file-description"></i>Informe mensual</a>
+  <a href="#" class="nav-item" data-page="inquilina" data-title="Control de Inquilina"><i class="ti ti-building-skyscraper"></i>Inquilina</a>
+
+  <div class="nav-sec">Operaciones</div>
+  <a href="#" class="nav-item" data-page="ventas" data-title="Ventas"><i class="ti ti-currency-dollar"></i>Ventas</a>
+  <a href="#" class="nav-item" data-page="gastos" data-title="Gastos"><i class="ti ti-receipt"></i>Gastos</a>
+  <a href="#" class="nav-item" data-page="facturacion" data-title="Facturación"><i class="ti ti-file-invoice"></i>Facturación</a>
+  <a href="#" class="nav-item" data-page="inventario" data-title="Inventario"><i class="ti ti-package"></i>Inventario</a>
+
+  <div class="nav-sec">Contabilidad</div>
+  <a href="#" class="nav-item" data-page="caja" data-title="Arqueo de caja"><i class="ti ti-cash"></i>Arqueo de caja</a>
+  <a href="#" class="nav-item" data-page="deudas" data-title="Cuentas y deudas"><i class="ti ti-credit-card"></i>Cuentas y deudas</a>
+  <a href="#" class="nav-item" data-page="analisis" data-title="Análisis"><i class="ti ti-chart-bar"></i>Análisis</a>
+
+  <div class="nav-sec">Equipo</div>
+  <a href="#" class="nav-item" data-page="vendedores" data-title="Vendedores"><i class="ti ti-users"></i>Vendedores</a>
+
+  <div class="nav-sec">Sistema</div>
+  <a href="#" class="nav-item" data-page="historial" data-title="Meses cerrados"><i class="ti ti-archive"></i>Meses cerrados</a>
+  <a href="#" class="nav-item" onclick="mostrarModalCierreManual()" style="color:var(--amber)"><i class="ti ti-calendar-off" style="color:var(--amber)"></i>Cerrar mes</a>
+  <a href="#" class="nav-item" onclick="cerrarSesion()" style="color:var(--red); margin-top:10px; border-top:0.5px solid var(--border); padding-top:12px;"><i class="ti ti-logout" style="color:var(--red)"></i>Cerrar Sesión</a>
+</nav>
+
+<main class="main">
+  <div class="topbar" id="topbar">
+    <button class="hamburger" onclick="toggleSidebar()"><i class="ti ti-menu-2" style="font-size:20px"></i></button>
+    <span class="topbar-title" id="topbar-title">Inicio</span>
+    <div style="width:28px"></div>
+  </div>
+  <div class="mob-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="page active" id="page-dashboard">
+    <div class="page-title">Resumen del negocio</div>
+    <div class="page-sub">Guanabanazo 2026 — vista general</div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Ingresos totales</div><div class="metric-val green" id="m-ing">$0</div><div class="metric-tag">Total entradas</div></div>
+      <div class="metric"><div class="metric-label">Gastos totales</div><div class="metric-val red" id="m-gas">$0</div><div class="metric-tag">Total salidas</div></div>
+      <div class="metric"><div class="metric-label">Saldo neto</div><div class="metric-val" id="m-saldo">$0</div><div class="metric-tag">Saldo anterior incluido</div></div>
+      <div class="metric"><div class="metric-label">Total deudas</div><div class="metric-val amber" id="m-deu">$0</div><div class="metric-tag">Cuentas por pagar</div></div>
+    </div>
+    
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-chart-bar"></i>Gráfico: Ventas por Vendedor</div>
+        <div id="dash-vend" class="v-chart"></div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title"><i class="ti ti-chart-bar"></i>Gráfico: Situación Financiera Base</div>
+        <div id="dash-financiero" class="v-chart"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="ti ti-alert-triangle"></i>Situación financiera base (Valores)</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
+        <div class="metric"><div class="metric-label">Gastos mensuales fijos</div><div class="metric-val red">$1.065.000</div></div>
+        <div class="metric"><div class="metric-label">Total deudas vigentes</div><div class="metric-val amber" id="lbl-deudas-dashboard">$0</div></div>
+        <div class="metric"><div class="metric-label">Pasivo total</div><div class="metric-val red" id="lbl-pasivo-dashboard">$0</div></div>
+        <div class="metric"><div class="metric-label">Saldo anterior</div><div class="metric-val green" id="lbl-saldo-anterior">$126.000</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-reporte">
+    <div class="page-title">Reporte mensual</div>
+    <div class="page-sub">Ingresos y gastos desglosados mes a mes</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <label style="font-size:12px;color:var(--text2);font-weight:500">Año:</label>
+      <select id="rep-anio" onchange="renderReporte()" style="width:auto;padding:6px 10px">
+        <option value="2025">2025</option><option value="2026" selected>2026</option>
+      </select>
+      <button class="btn" onclick="exportReporteCSV()"><i class="ti ti-download"></i> Exportar CSV</button>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-trending-up"></i>Historial de balances</div>
+      <table id="tabla-reporte">
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Ingresos</th>
+            <th>Gastos</th>
+            <th>Balance Neto</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="page" id="page-informe">
+    <div class="page-title">Informe mensual analítico</div>
+    <div class="page-sub">Documento ejecutivo de rendimiento</div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-file-text"></i>Resumen General Ejecutivo</div>
+      <div class="analysis-box">
+        <div class="ab-title"><i class="ti ti-bulb"></i>Diagnóstico Comercial</div>
+        <div id="informe-texto">Cargando análisis de datos corrientes del mes...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-ventas">
+    <div class="page-title">Gestión de Ventas</div>
+    <div class="page-sub">Registra y controla los ingresos de productos</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" id="form-venta-titulo"><i class="ti ti-plus"></i>Nueva Venta</div>
+        <form id="form-venta" onsubmit="guardarVenta(event)">
+          <input type="hidden" id="v-index" value="">
+          <div class="fg">
+            <div class="fr">
+              <label>Vendedor</label>
+              <select id="v-vendedor" required>
+                <option value="Yuliana">Yuliana</option>
+                <option value="Juan">Juan</option>
+              </select>
+            </div>
+            <div class="fr">
+              <label>Producto / Concepto</label>
+              <input type="text" id="v-producto" placeholder="Ej: Guanábana Premium" required>
+            </div>
+          </div>
+          <div class="fr">
+             <label>Fecha</label>
+             <input type="date" id="v-fecha" required>
+          </div>
+          <div class="fg">
+            <div class="fr">
+              <label>Cantidad</label>
+              <input type="number" id="v-cantidad" min="1" value="1" required>
+            </div>
+            <div class="fr">
+              <label>Total ($)</label>
+              <input type="number" id="v-total" min="0" placeholder="0" required>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="btn-venta-submit">Registrar Venta</button>
+            <button type="button" class="btn" id="btn-venta-cancelar" style="display:none;" onclick="cancelarEdicionVenta()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-list"></i>Historial del Mes</div>
+        <div style="overflow-x:auto;">
+          <table id="tabla-ventas">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Vendedor</th>
+                <th>Producto</th>
+                <th>Cant.</th>
+                <th>Total</th>
+                <th style="text-align:center; width:110px;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-gastos">
+    <div class="page-title">Egresos y Gastos</div>
+    <div class="page-sub">Salidas de capital operacionales y fijas</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" id="form-gasto-titulo"><i class="ti ti-minus"></i>Registrar Gasto</div>
+        <form id="form-gasto" onsubmit="guardarGasto(event)">
+          <input type="hidden" id="g-index" value="">
+          <div class="fr" style="margin-bottom:12px">
+            <label>Concepto / Detalle</label>
+          <div class="fr" style="margin-bottom:12px">
+            <label>Fecha</label>
+            <input type="date" id="g-fecha" required>
+          </div>  
+            <input type="text" id="g-concepto" placeholder="Ej: Pago de Luz" required>
+          </div>
+          <div class="fg">
+            <div class="fr">
+              <label>Categoría</label>
+              <select id="g-categoria">
+                <option value="Fijo">Gasto Fijo</option>
+                <option value="Variable">Gasto Variable</option>
+                <option value="Inventario">Compra de Inventario</option>
+              </select>
+            </div>
+            <div class="fr">
+              <label>Monto ($)</label>
+              <input type="number" id="g-monto" min="0" placeholder="0" required>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="btn-gasto-submit" style="background:var(--red); border-color:var(--red)">Guardar Egreso</button>
+            <button type="button" class="btn" id="btn-gasto-cancelar" style="display:none;" onclick="cancelarEdicionGasto()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-receipt"></i>Listado Completo de Egresos</div>
+        <div style="overflow-x:auto;">
+          <table id="tabla-gastos">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Categoría</th>
+                <th>Monto</th>
+                <th style="text-align:center; width:110px;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-facturacion">
+    <div class="page-title">Módulo de Facturación</div>
+    <div class="page-sub">Generación y control de comprobantes de clientes</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-file-plus"></i> Generar Nueva Factura</div>
+        <div class="fg">
+          <div class="fr">
+            <label>Nombre del Cliente</label>
+            <input type="text" id="fact-cliente" placeholder="Ej: Juan Pérez">
+          </div>
+          <div class="fr">
+            <label>Documento / NIT</label>
+            <input type="text" id="fact-documento" placeholder="Ej: 10203040">
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="card-title" style="font-size: 13px; color: var(--text2);"><i class="ti ti-shopping-cart-plus"></i> Agregar Ítems</div>
+        <div class="fg">
+          <div class="fr">
+            <label>Producto / Detalle</label>
+            <input type="text" id="fact-item-nombre" placeholder="Ej: Vaso de Guanábana grande">
+          </div>
+          <div class="fr" style="display:grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="fr">
+              <label>Cant.</label>
+              <input type="number" id="fact-item-cant" min="1" value="1">
+            </div>
+            <div class="fr">
+              <label>Precio ($)</label>
+              <input type="number" id="fact-item-precio" min="0" placeholder="0">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="agregarItemFactura()" style="width: 100%; justify-content: center;">
+          <i class="ti ti-plus"></i> Agregar a la Lista
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i class="ti ti-eye"></i> Vista Previa del Comprobante</div>
+        <div id="factura-pdf-area" style="background: #fff; color: #000; padding: 20px; border: 1px solid #ddd; border-radius: var(--radius); font-family: monospace; font-size: 12px; line-height: 1.5;">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <h3 style="margin: 0; font-size: 16px; text-transform: uppercase;">Guanabanazo 2026</h3>
+            <p style="margin: 2px 0;">NIT: 123456789-0</p>
+            <p style="margin: 2px 0;">-----------------------------------------</p>
+            <h4 style="margin: 5px 0; font-size: 13px;">FACTURA DE VENTA</h4>
+            <p style="margin: 2px 0;" id="fact-preview-num">N°: FAC-0001</p>
+            <p style="margin: 2px 0;" id="fact-preview-fecha">Fecha: --/--/----</p>
+          </div>
+          <div style="margin-bottom: 15px; border-bottom: 1px dashed #000; padding-bottom: 8px;">
+            <p style="margin: 2px 0;"><strong>Cliente:</strong> <span id="fact-preview-cliente">General</span></p>
+            <p style="margin: 2px 0;"><strong>Doc/NIT:</strong> <span id="fact-preview-doc">---------</span></p>
+          </div>
+          <table style="width: 100%; font-family: monospace; font-size: 12px; color: #000; margin-bottom: 15px;">
+            <thead>
+              <tr style="border-bottom: 1px solid #000;">
+                <th style="text-align: left; padding: 4px 0; color: #000;">Cant / Detalle</th>
+                <th style="text-align: right; padding: 4px 0; color: #000;">Total</th>
+              </tr>
+            </thead>
+            <tbody id="fact-preview-items">
+              <tr>
+                <td colspan="2" style="text-align: center; padding: 15px; color: #777;" id="fact-vacia-msg">No hay productos en la factura</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="border-top: 1px dashed #000; padding-top: 8px; text-align: right;">
+            <p style="margin: 4px 0; font-size: 13px;"><strong>TOTAL A PAGAR: <span id="fact-preview-total">$0</span></strong></p>
+          </div>
+          <div style="text-align: center; margin-top: 20px; font-size: 10px;">
+            <p style="margin: 2px 0;">¡Gracias por su compra!</p>
+            <p style="margin: 2px 0;">Guanabanazo - Refrescando tu día</p>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top: 15px;">
+          <button class="btn btn-primary" onclick="descargarFacturaPDF()" style="flex: 1; justify-content: center;">
+            <i class="ti ti-printer"></i> Descargar PDF / Ticket
+          </button>
+          <button class="btn" onclick="limpiarFactura()" style="color: var(--red); border-color: var(--border);">
+            <i class="ti ti-trash"></i> Limpiar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-inventario">
+    <div class="page-title">Inventariado de Stock</div>
+    <div class="page-sub">Control de existencias físicas en tiempo real</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" id="form-prod-titulo"><i class="ti ti-package"></i>Ingresar Producto</div>
+        <form id="form-inventario" onsubmit="guardarProducto(event)">
+          <input type="hidden" id="i-index" value="">
+          <div class="fr" style="margin-bottom:12px">
+            <label>Nombre del Producto</label>
+          <div class="fr" style="margin-bottom:12px">
+            <label>Fecha de ingreso</label>
+            <input type="date" id="i-fecha" required>
+          </div>  
+            <input type="text" id="i-nombre" placeholder="Ej: Guanábana Pulpa" required>
+          </div>
+          <div class="fg3">
+            <div class="fr">
+              <label>Stock Disponible</label>
+              <input type="number" id="i-stock" min="0" placeholder="0" required>
+            </div>
+            <div class="fr">
+              <label>Unidad</label>
+              <select id="i-unidad" required>
+                <option value="Kg">Kg</option>
+                <option value="gramo">Gramo</option>
+                <option value="unidades">Unidades</option>
+              </select>
+            </div>
+            <div class="fr">
+              <label>Estado de Stock</label>
+              <select id="i-estado">
+                <option value="Saludable">Saludable (Verde)</option>
+                <option value="Revisar">Revisar (Naranja)</option>
+                <option value="Crítico">Crítico (Rojo)</option>
+              </select>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="btn-prod-submit">Guardar en Stock</button>
+            <button type="button" class="btn" id="btn-prod-cancelar" style="display:none;" onclick="cancelarEdicionProducto()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-list"></i>Control de Productos Existentes</div>
+        <div style="overflow-x:auto;">
+          <table id="tabla-inventario">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Stock Disponible</th>
+                <th>Estado</th>
+                <th style="text-align:center; width:110px;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-caja">
+    <div class="page-title">Arqueo de Caja Real</div>
+    <div class="page-sub">Verificación de efectivo físico contra sistema</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" id="arqueo-form-titulo"><i class="ti ti-calculator"></i>Añadir Fondo / Registro al Arqueo</div>
+        <form id="form-arqueo" onsubmit="guardarRegistroArqueo(event)">
+          <input type="hidden" id="arq-index" value="">
+          <div class="fr" style="margin-bottom:12px">
+            <label>Clasificación / Detalle del Fondo</label>
+            <input type="text" id="arq-clasificacion" placeholder="Ej: Fondos en efectivo, Base de caja" required>
+          </div>
+          <div class="fg">
+            <div class="fr">
+              <label>Tipo de Cuenta / Soporte</label>
+              <select id="arq-tipo">
+                <option value="Efectivo">Efectivo Físico</option>
+                <option value="Nequi">Nequi</option>
+                <option value="Banco">Banco</option>
+              </select>
+            </div>
+            <div class="fr">
+              <label id="lbl-arq-monto">Cantidad / Valor ($)</label>
+              <input type="number" id="arq-total" placeholder="0" required>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="btn-arqueo-submit">Agregar al Arqueo</button>
+            <button type="button" class="btn" id="btn-arqueo-cancelar" style="display:none;" onclick="cancelarEdicionArqueo()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-table"></i>Tabla de Control de Arqueo</div>
+        <div style="overflow-x:auto;">
+          <table class="excel-table" id="tabla-excel-arqueo">
+            <thead>
+              <tr>
+                <th colspan="3" class="excel-header">ARQUEO DE EFECTIVO EN CAJA</th>
+              </tr>
+              <tr>
+                <th class="excel-th" style="width:45%;">Clasificación</th>
+                <th class="excel-th" style="width:30%;">Total</th>
+                <th class="excel-th" style="width:25%;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-excel-arqueo"></tbody>
+            <tfoot>
+              <tr class="excel-row-total">
+                <td class="excel-td">TOTAL EFECTIVO Y BANCOS EN CAJA</td>
+                <td class="excel-td-right" id="excel-total-caja">$0</td>
+                <td class="excel-td-center">—</td>
+              </tr>
+              <tr class="excel-row-reporte">
+                <td class="excel-td">TOTAL SEGÚN REPORTE (SISTEMA)</td>
+                <td class="excel-td-right" id="excel-total-reporte">$0</td>
+                <td class="excel-td-center">—</td>
+              </tr>
+              <tr class="excel-row-faltante" id="excel-fila-diferencia">
+                <td class="excel-td" id="excel-lbl-diferencia">FALTANTE DE CAJA</td>
+                <td class="excel-td-right" id="excel-val-diferencia">$0</td>
+                <td class="excel-td-center">—</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-deudas">
+    <div class="page-title">Cuentas por Pagar & Deudas</div>
+    <div class="page-sub">Control de pasivos externos vigentes</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" id="form-deuda-titulo"><i class="ti ti-plus"></i>Ingresar / Modificar Deuda</div>
+        <form id="form-deudas" onsubmit="guardarDeuda(event)">
+          <input type="hidden" id="d-index" value="">
+          <div class="fr" style="margin-bottom:12px">
+          <div class="fr" style="margin-bottom:12px">
+            <label>Fecha de Registro</label>
+            <input type="date" id="d-fecha" required>
+          </div>  
+            <label>Acreedor / Proveedor</label>
+            <input type="text" id="d-acreedor" placeholder="Ej: Distribuidora de Frutas S.A." required>
+          </div>
+          <div class="fr" style="margin-bottom:16px">
+            <label>Monto Pendiente Inicial ($)</label>
+            <input type="number" id="d-monto" min="0" placeholder="0" required>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="btn-deuda-submit">Ingresar Deuda</button>
+            <button type="button" class="btn" id="btn-deuda-cancelar" style="display:none;" onclick="cancelarEdicionDeuda()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-credit-card"></i>Estatus de Cuentas Pasivas</div>
+        <div style="overflow-x:auto;">
+          <table id="tabla-deudas">
+            <thead>
+              <tr>
+                <th>Acreedor / Proveedor</th>
+                <th>Monto Pendiente</th>
+                <th style="text-align:center; width:310px;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-analisis">
+    <div class="page-title">Análisis de Rendimiento Financiero</div>
+    <div class="page-sub">Ratios e indicadores de salud operacional</div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Ratio de Cobertura</div><div class="metric-val" id="an-ratio">0.0x</div><div class="metric-tag">Ingresos / Pasivos</div></div>
+      <div class="metric"><div class="metric-label">Eficiencia de Gasto</div><div class="metric-val" id="an-eficiencia">0%</div><div class="metric-tag">Gastos vs Ingresos</div></div>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+      <div class="card">
+        <div class="card-title"><i class="ti ti-arrows-left-right"></i>Comparación: Ventas vs Gastos (Mes Actual)</div>
+        <div id="chart-ventas-gastos" class="v-chart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-vendedores">
+    <div class="page-title">Equipo de Vendedores</div>
+    <div class="page-sub">Gestión del personal de ventas</div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-users"></i> Listado del Equipo</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Yuliana</td>
+            <td>Vendedora Principal</td>
+            <td><span class="badge badge-green">Activo</span></td>
+          </tr>
+          <tr>
+            <td>Juan</td>
+            <td>Vendedor Junior</td>
+            <td><span class="badge badge-green">Activo</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="page" id="page-inquilina">
+    <div class="page-title">Control de Inquilina</div>
+    <div class="page-sub">Registro de cobros, mensualidades y estados de pago de arrendamiento</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" id="form-inquilina-titulo"><i class="ti ti-file-plus"></i> Registrar Pago / Cobro</div>
+        <form id="form-inquilina" onsubmit="guardarRegistroInquilina(event)">
+          <input type="hidden" id="inq-index" value="">
+          <div class="fr" style="margin-bottom:12px">
+            <label>Concepto / Mes Correspondiente</label>
+            <input type="text" id="inq-concepto" placeholder="Ej: Arriendo - Mes de Junio" required>
+          </div>
+          <div class="fg">
+            <div class="fr">
+              <label>Monto del Arriendo ($)</label>
+              <input type="number" id="inq-monto" min="0" placeholder="0" required>
+            </div>
+            <div class="fr">
+              <label>Estado del Pago</label>
+              <select id="inq-estado">
+                <option value="Pagado">Pagado (Verde)</option>
+                <option value="Pendiente">Pendiente (Naranja)</option>
+              </select>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="btn-inquilina-submit">Guardar Registro</button>
+            <button type="button" class="btn" id="btn-inquilina-cancelar" style="display:none;" onclick="cancelarEdicionInquilina()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="ti ti-list"></i> Historial de Arrendamiento</div>
+        <div style="overflow-x:auto;">
+          <table id="tabla-inquilina">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Estado</th>
+                <th style="text-align:center; width:220px;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-historial">
+    <div class="page-title">Meses Cerrados</div>
+    <div class="page-sub">Historial consolidado de periodos anteriores</div>
+    <div class="card">
+      <p class="empty">No hay periodos archivados en este año fiscal.</p>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="toast" id="toast">Operación realizada con éxito</div>
+
+<div class="modal" id="modal-cierre">
+  <div class="modal-content">
+    <div class="card-title" style="color:var(--amber)"><i class="ti ti-alert-triangle"></i> ¿Cerrar mes actual?</div>
+    <p style="font-size:13px; color:var(--text2); margin-bottom:15px;">Esta acción archivará de forma permanente los ingresos y egresos actuales en el historial.</p>
+    <div class="btn-row" style="justify-content: flex-end;">
+      <button class="btn" onclick="ocultarModalCierre()">Cancelar</button>
+      <button class="btn btn-primary" style="background:var(--amber); border-color:var(--amber)" onclick="procesarCierreMes()">Confirmar Cierre</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// --- DATOS GLOBALES EN MEMORIA ---
+let ventas = [];
+let gastos = [];
+let deudas = [];
+let arqueoCaja = [];
+let inquilina = [];
+let inventario = [];
+let itemsFacturaActual = [];
+let numeroFacturaContador = 1;
+
+let saldoAnterior = 0;
+let gastosFijosMensuales = 1065000;
+
+// ---------- PERSISTENCIA ----------
+function guardarDatos() {
+  localStorage.setItem("ventas", JSON.stringify(ventas));
+  localStorage.setItem("gastos", JSON.stringify(gastos));
+  localStorage.setItem("deudas", JSON.stringify(deudas));
+  localStorage.setItem("arqueoCaja", JSON.stringify(arqueoCaja));
+  localStorage.setItem("inquilina", JSON.stringify(inquilina));
+  localStorage.setItem("inventario", JSON.stringify(inventario));
+  localStorage.setItem("saldoAnterior", saldoAnterior);
+}
+
+function cargarDatos() {
+  ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+  gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+  deudas = JSON.parse(localStorage.getItem("deudas")) || [];
+  arqueoCaja = JSON.parse(localStorage.getItem("arqueoCaja")) || [];
+  inquilina = JSON.parse(localStorage.getItem("inquilina")) || [];
+  inventario = JSON.parse(localStorage.getItem("inventario")) || [];
+  saldoAnterior = parseFloat(localStorage.getItem("saldoAnterior")) || 0;
+}
+
+// --- PROCESO DE INICIAR SESIÓN ---
+function procesarLogin(event) {
+  event.preventDefault();
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-password').value.trim();
+  const errorDiv = document.getElementById('login-error');
+
+  if ((user === 'Jormary' && pass === '032023') || (user === 'Jorge' && pass === 'Chopo13.')) {
+    errorDiv.style.display = 'none';
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('erp-root').style.display = 'flex';
+    
+    showToast(`¡Bienvenido al sistema, ${user}!`);
+    inicializarDatos();
+  } else {
+    errorDiv.style.display = 'flex';
+  }
+}
+
+function cerrarSesion() {
+  document.getElementById('erp-root').style.display = 'none';
+  document.getElementById('login-container').style.display = 'flex';
+  document.getElementById('form-login').reset();
+}
+
+function colocarFechaActual() {
+  const hoy = new Date().toISOString().split('T')[0];
+
+  ['v-fecha','g-fecha','i-fecha','d-fecha'].forEach(id=>{
+    const campo=document.getElementById(id);
+    if(campo) campo.value=hoy;
+  });
+}
+
+function inicializarDatos() {
+  colocarFechaActual();
+
+  cargarDatos();
+  actualizarCalculos();
+  renderVentas();
+  renderGastos();
+  renderDeudas();
+  renderArqueo();
+  renderInquilina();
+  renderInventario();
+
+  renderGraficoFinanciero();
+}
+
+// --- EVENTOS DEL ENTORNO DE FACTURACIÓN ---
+document.getElementById('fact-cliente').addEventListener('input', function(e) {
+    document.getElementById('fact-preview-cliente').innerText = e.target.value || "General";
+});
+document.getElementById('fact-documento').addEventListener('input', function(e) {
+    document.getElementById('fact-preview-doc').innerText = e.target.value || "---------";
+});
+
+function agregarItemFactura() {
+    const nombre = document.getElementById('fact-item-nombre').value.trim();
+    const cant = parseInt(document.getElementById('fact-item-cant').value) || 0;
+    const precio = parseFloat(document.getElementById('fact-item-precio').value) || 0;
+
+    if (!nombre || cant <= 0 || precio <= 0) {
+        alert("Introduce una descripción válida, cantidad y precio mayor a 0.");
+        return;
+    }
+
+    itemsFacturaActual.push({ nombre, cantidad: cant, precio, total: cant * precio });
+    document.getElementById('fact-item-nombre').value = '';
+    document.getElementById('fact-item-cant').value = '1';
+    document.getElementById('fact-item-precio').value = '';
+    actualizarVistaPreviaFactura();
+}
+
+function actualizarVistaPreviaFactura() {
+    const tbody = document.getElementById('fact-preview-items');
+    tbody.innerHTML = '';
+
+    if (itemsFacturaActual.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="2" style="text-align: center; padding: 15px; color: #777;">No hay productos en la factura</td></tr>`;
+        document.getElementById('fact-preview-total').innerText = "$0";
+        return;
+    }
+
+    let granTotal = 0;
+    itemsFacturaActual.forEach((item) => {
+        granTotal += item.total;
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td style="padding: 4px 0; text-align: left; vertical-align: top; color:#000;">
+                ${item.cantidad} x ${item.nombre}<br>
+                <small style="color:#555;">(c/u $${item.precio.toLocaleString()})</small>
+            </td>
+            <td style="padding: 4px 0; text-align: right; vertical-align: top; color:#000;">
+                $${item.total.toLocaleString()}
+            </td>
+        `;
+        tbody.appendChild(fila);
+    });
+
+    document.getElementById('fact-preview-total').innerText = `$${granTotal.toLocaleString()}`;
+    const hoy = new Date();
+    document.getElementById('fact-preview-fecha').innerText = `Fecha: ${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`;
+    document.getElementById('fact-preview-num').innerText = `N°: FAC-${String(numeroFacturaContador).padStart(4, '0')}`;
+}
+
+function limpiarFactura() {
+    itemsFacturaActual = [];
+    document.getElementById('fact-cliente').value = '';
+    document.getElementById('fact-documento').value = '';
+    document.getElementById('fact-preview-cliente').innerText = "General";
+    document.getElementById('fact-preview-doc').innerText = "---------";
+    actualizarVistaPreviaFactura();
+}
+
+function descargarFacturaPDF() {
+    if (itemsFacturaActual.length === 0) {
+        alert("Agrega productos antes de exportar.");
+        return;
+    }
+    const elemento = document.getElementById('factura-pdf-area');
+    const opciones = {
+        margin: 10,
+        filename: `Factura_FAC-${String(numeroFacturaContador).padStart(4, '0')}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opciones).from(elemento).save().then(() => {
+        numeroFacturaContador++;
+        limpiarFactura();
+        showToast("Factura descargada exitosamente.");
+    });
+}
+
+// --- OPERACIONES: GESTIÓN DE VENTAS ---
+function guardarVenta(e) {
+  e.preventDefault();
+  const index = document.getElementById('v-index').value;
+  const vendedor = document.getElementById('v-vendedor').value;
+  const producto = document.getElementById('v-producto').value.trim();
+  const cantidad = parseInt(document.getElementById('v-cantidad').value);
+  const total = parseFloat(document.getElementById('v-total').value);
+
+  if (index === "") {
+    // Crear
+   const fecha = document.getElementById('v-fecha').value;
+
+ventas.push({
+  fecha, vendedor, producto, cantidad, total });
+    showToast("Venta registrada");
+  } else {
+    // Editar
+    ventas[parseInt(index)].vendedor = vendedor;
+    ventas[parseInt(index)].producto = producto;
+    ventas[parseInt(index)].cantidad = cantidad;
+    ventas[parseInt(index)].total = total;
+    showToast("Venta actualizada");
+  }
+  
+  cancelarEdicionVenta();
+  guardarDatos();
+  inicializarDatos();
+}
+
+function editarVenta(idx) {
+  const v = ventas[idx];
+  document.getElementById('v-index').value = idx;
+  document.getElementById('v-vendedor').value = v.vendedor;
+  document.getElementById('v-producto').value = v.producto;
+  document.getElementById('v-cantidad').value = v.cantidad;
+  document.getElementById('v-total').value = v.total;
+  
+  document.getElementById('form-venta-titulo').innerHTML = `<i class="ti ti-pencil"></i> Editar Venta`;
+  document.getElementById('btn-venta-submit').innerText = "Actualizar Venta";
+  document.getElementById('btn-venta-cancelar').style.display = "inline-flex";
+}
+
+function cancelarEdicionVenta() {
+  document.getElementById('v-index').value = "";
+  document.getElementById('form-venta').reset();
+  document.getElementById('form-venta-titulo').innerHTML = `<i class="ti ti-plus"></i> Nueva Venta`;
+  document.getElementById('btn-venta-submit').innerText = "Registrar Venta";
+  document.getElementById('btn-venta-cancelar').style.display = "none";
+}
+
+function eliminarVenta(index) {
+  if (confirm("¿Estás seguro de eliminar esta venta?")) {
+    ventas.splice(index, 1);
+    showToast("Venta eliminada");
+    guardarDatos();
+    inicializarDatos();
+  }
+}
+
+function renderVentas() {
+  const tbody = document.querySelector('#tabla-ventas tbody');
+  tbody.innerHTML = '';
+  if(ventas.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="empty">No hay ventas registradas</td></tr>';
+    return;
+  }
+  ventas.forEach((v, idx) => {
+    tbody.innerHTML += `<tr>
+      <td>${v.fecha}</td>
+      <td>${v.vendedor}</td>
+      <td>${v.producto}</td>
+      <td>${v.cantidad}</td>
+      <td>$${v.total.toLocaleString()}</td>
+      <td style="text-align:center;">
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber);" onclick="editarVenta(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarVenta(${idx})"><i class="ti ti-trash"></i></button>
+      </td>
+    </tr>`;
+  });
+}
+
+// --- OPERACIONES: GESTIÓN DE GASTOS ---
+function guardarGasto(e) {
+  e.preventDefault();
+  const index = document.getElementById('g-index').value;
+  const concepto = document.getElementById('g-concepto').value.trim();
+  const categoria = document.getElementById('g-categoria').value;
+  const monto = parseFloat(document.getElementById('g-monto').value);
+
+  if(index === "") {
+    const fecha = document.getElementById('g-fecha').value;
+
+gastos.push({
+  fecha, concepto, categoria, monto });
+    showToast("Egreso registrado");
+  } else {
+    gastos[parseInt(index)].concepto = concepto;
+    gastos[parseInt(index)].categoria = categoria;
+    gastos[parseInt(index)].monto = monto;
+    showToast("Egreso actualizado");
+  }
+
+  cancelarEdicionGasto();
+  guardarDatos();
+  inicializarDatos();
+}
+
+function editarGasto(idx) {
+  const g = gastos[idx];
+  document.getElementById('g-index').value = idx;
+  document.getElementById('g-concepto').value = g.concepto;
+  document.getElementById('g-categoria').value = g.categoria;
+  document.getElementById('g-monto').value = g.monto;
+
+  document.getElementById('form-gasto-titulo').innerHTML = `<i class="ti ti-pencil"></i> Editar Gasto`;
+  document.getElementById('btn-gasto-submit').innerText = "Actualizar Egreso";
+  document.getElementById('btn-gasto-cancelar').style.display = "inline-flex";
+}
+
+function cancelarEdicionGasto() {
+  document.getElementById('g-index').value = "";
+  document.getElementById('form-gasto').reset();
+  document.getElementById('form-gasto-titulo').innerHTML = `<i class="ti ti-minus"></i> Registrar Gasto`;
+  document.getElementById('btn-gasto-submit').innerText = "Guardar Egreso";
+  document.getElementById('btn-gasto-cancelar').style.display = "none";
+}
+
+function eliminarGasto(index) {
+  if (confirm("¿Estás seguro de eliminar este egreso?")) {
+    gastos.splice(index, 1);
+    showToast("Egreso eliminado");
+    guardarDatos();
+    inicializarDatos();
+  }
+}
+
+function renderGastos() {
+  const tbody = document.querySelector('#tabla-gastos tbody');
+  tbody.innerHTML = '';
+  if(gastos.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">No hay egresos registrados</td></tr>';
+    return;
+  }
+  gastos.forEach((g, idx) => {
+    tbody.innerHTML += `<tr>
+      <td>${g.fecha}</td>
+      <td>${g.concepto}</td>
+      <td><span class="badge ${g.categoria === 'Fijo'?'badge-red':'badge-amber'}">${g.categoria}</span></td>
+      <td>$${g.monto.toLocaleString()}</td>
+      <td style="text-align:center;">
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber);" onclick="editarGasto(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarGasto(${idx})"><i class="ti ti-trash"></i></button>
+      </td>
+    </tr>`;
+  });
+}
+
+// --- OPERACIONES: CONTABILIDAD DE DEUDAS ---
+function guardarDeuda(e) {
+  e.preventDefault();
+  const index = document.getElementById('d-index').value;
+  const acreedor = document.getElementById('d-acreedor').value.trim();
+  const monto = parseFloat(document.getElementById('d-monto').value);
+
+  if (index === "") {
+    const fecha = document.getElementById('d-fecha').value;
+
+deudas.push({
+  fecha,
+  acreedor,
+  monto
+});
+    showToast("Deuda registrada");
+  } else {
+    deudas[parseInt(index)].acreedor = acreedor;
+    deudas[parseInt(index)].monto = monto;
+    showToast("Deuda actualizada");
+  }
+
+  cancelarEdicionDeuda();
+  guardarDatos();
+  inicializarDatos();
+}
+
+function editarDeuda(idx) {
+  const d = deudas[idx];
+  document.getElementById('d-index').value = idx;
+  document.getElementById('d-acreedor').value = d.acreedor;
+  document.getElementById('d-monto').value = d.monto;
+
+  document.getElementById('form-deuda-titulo').innerHTML = `<i class="ti ti-pencil"></i> Editar Deuda`;
+  document.getElementById('btn-deuda-submit').innerText = "Actualizar Deuda";
+  document.getElementById('btn-deuda-cancelar').style.display = "inline-flex";
+}
+
+function cancelarEdicionDeuda() {
+  document.getElementById('d-index').value = "";
+  document.getElementById('form-deudas').reset();
+  document.getElementById('form-deuda-titulo').innerHTML = `<i class="ti ti-plus"></i> Ingresar / Modificar Deuda`;
+  document.getElementById('btn-deuda-submit').innerText = "Ingresar Deuda";
+  document.getElementById('btn-deuda-cancelar').style.display = "none";
+}
+
+function eliminarDeuda(index) {
+  if (confirm("¿Estás seguro de eliminar esta cuenta pendiente por completo?")) {
+    deudas.splice(index, 1);
+    showToast("Deuda removida");
+    guardarDatos();
+    inicializarDatos();
+  }
+}
+
+function abonarDeuda(index) {
+  const deuda = deudas[index];
+  const valorAbono = prompt(`Monto actual pendiente con "${deuda.acreedor}": $${deuda.monto.toLocaleString()}\n\n¿Cuánto deseas abonar? ($)`);
+  
+  if (valorAbono === null) return;
+  const abono = parseFloat(valorAbono);
+  
+  if (isNaN(abono) || abono <= 0) {
+    alert("Por favor, introduce un monto válido mayor a 0.");
+    return;
+  }
+  if (abono > deuda.monto) {
+    alert("El abono no puede ser mayor que el saldo pendiente.");
+    return;
+  }
+
+  deuda.monto -= abono;
+
+  const fecha = document.getElementById('g-fecha').value;
+
+gastos.push({
+  fecha,
+    concepto: `Abono a deuda: ${deuda.acreedor}`,
+    categoria: 'Variable',
+    monto: abono
+  });
+
+  showToast(`Abono de $${abono.toLocaleString()} realizado`);
+
+  if (deuda.monto === 0) {
+    alert(`¡La deuda con "${deuda.acreedor}" ha sido pagada completamente!`);
+    deudas.splice(index, 1);
+  }
+
+  guardarDatos();
+  inicializarDatos();
+}
+
+function renderDeudas() {
+  const tbody = document.querySelector('#tabla-deudas tbody');
+  tbody.innerHTML = '';
+  if(deudas.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="empty">Sin cuentas pendientes</td></tr>';
+    return;
+  }
+  deudas.forEach((d, idx) => {
+    tbody.innerHTML += `<tr>
+      <td>${d.acreedor}</td>
+      <td>$${d.monto.toLocaleString()}</td>
+      <td style="text-align:center;">
+        <button class="btn btn-mini btn-primary" style="margin-right:4px;" onclick="abonarDeuda(${idx})">
+          <i class="ti ti-cash"></i> Abonar
+        </button>
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarDeuda(${idx})">
+          <i class="ti ti-pencil"></i>
+        </button>
+        <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarDeuda(${idx})"><i class="ti ti-trash"></i></button>
+      </td>
+    </tr>`;
+  });
+}
+
+// --- OPERACIONES: ARQUEO DE CAJA ---
+function guardarRegistroArqueo(e) {
+  e.preventDefault();
+  const index = document.getElementById('arq-index').value;
+  const clasificacion = document.getElementById('arq-clasificacion').value.trim();
+  const tipo = document.getElementById('arq-tipo').value;
+  const total = parseFloat(document.getElementById('arq-total').value);
+
+  if (index === "") {
+    arqueoCaja.push({ clasificacion, tipo, total });
+    showToast("Fondo añadido al Arqueo");
+  } else {
+    arqueoCaja[parseInt(index)].clasificacion = clasificacion;
+    arqueoCaja[parseInt(index)].tipo = tipo;
+    arqueoCaja[parseInt(index)].total = total;
+    showToast("Fondo actualizado");
+  }
+
+  cancelarEdicionArqueo();
+  guardarDatos();
+  inicializarDatos();
+}
+
+function editarArqueo(idx) {
+  const a = arqueoCaja[idx];
+  document.getElementById('arq-index').value = idx;
+  document.getElementById('arq-clasificacion').value = a.clasificacion;
+  document.getElementById('arq-tipo').value = a.tipo;
+  document.getElementById('arq-total').value = a.total;
+
+  document.getElementById('arqueo-form-titulo').innerHTML = `<i class="ti ti-pencil"></i> Editar Registro Fondo`;
+  document.getElementById('btn-arqueo-submit').innerText = "Actualizar Fondo";
+  document.getElementById('btn-arqueo-cancelar').style.display = "inline-flex";
+}
+
+function cancelarEdicionArqueo() {
+  document.getElementById('arq-index').value = "";
+  document.getElementById('form-arqueo').reset();
+  document.getElementById('arqueo-form-titulo').innerHTML = `<i class="ti ti-calculator"></i> Añadir Fondo / Registro al Arqueo`;
+  document.getElementById('btn-arqueo-submit').innerText = "Agregar al Arqueo";
+  document.getElementById('btn-arqueo-cancelar').style.display = "none";
+}
+
+function eliminarArqueo(index) {
+  if (confirm("¿Deseas remover este registro de la caja física?")) {
+    arqueoCaja.splice(index, 1);
+    showToast("Registro removido");
+    guardarDatos();
+    inicializarDatos();
+  }
+}
+
+function renderArqueo() {
+  const tbody = document.getElementById('cuerpo-excel-arqueo');
+  tbody.innerHTML = '';
+  
+  let totalCajaFisico = 0;
+  arqueoCaja.forEach((a, idx) => {
+    totalCajaFisico += a.total;
+    tbody.innerHTML += `<tr>
+      <td class="excel-td">${a.clasificacion} (${a.tipo})</td>
+      <td class="excel-td-right">$${a.total.toLocaleString()}</td>
+      <td class="excel-td-center">
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarArqueo(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarArqueo(${idx})"><i class="ti ti-trash"></i></button>
+      </td>
+    </tr>`;
+  });
+
+  if(arqueoCaja.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="excel-td excel-td-center" style="color:#777;">Ningún efectivo ingresado en el arqueo físico.</td></tr>';
+  }
+
+  let totalSistema = ventas.reduce((acc, v) => acc + v.total, 0);
+  let diferencia = totalCajaFisico - totalSistema;
+
+  document.getElementById('excel-total-caja').innerText = `$${totalCajaFisico.toLocaleString()}`;
+  document.getElementById('excel-total-reporte').innerText = `$${totalSistema.toLocaleString()}`;
+  
+  const labelDif = document.getElementById('excel-lbl-diferencia');
+  const valDif = document.getElementById('excel-val-diferencia');
+  const rowDif = document.getElementById('excel-fila-diferencia');
+
+  if (diferencia >= 0) {
+    labelDif.innerText = "SOBRANTE / CUADRE DE CAJA";
+    valDif.innerText = `$${diferencia.toLocaleString()}`;
+    rowDif.style.background = "#e1f5ee";
+    rowDif.style.color = "#0f6e56";
+  } else {
+    labelDif.innerText = "FALTANTE DE CAJA";
+    valDif.innerText = `$${Math.abs(diferencia).toLocaleString()}`;
+    rowDif.style.background = "#fef2f2";
+    rowDif.style.color = "#991b1b";
+  }
+}
+
+// --- OPERACIONES: CONTROL DE INQUILINA ---
+function guardarRegistroInquilina(e) {
+  e.preventDefault();
+  const index = document.getElementById('inq-index').value;
+  const concepto = document.getElementById('inq-concepto').value.trim();
+  const monto = parseFloat(document.getElementById('inq-monto').value);
+  const estado = document.getElementById('inq-estado').value;
+
+  if (index === "") {
+    inquilina.push({ fecha: new Date().toLocaleDateString(), concepto, monto, estado });
+    if (estado === 'Pagado') {
+      ventas.push({
+        fecha: new Date().toLocaleDateString(),
+        vendedor: 'Sistema',
+        producto: `Ingreso Arriendo: ${concepto}`,
+        cantidad: 1,
+        total: monto
+      });
+    }
+    showToast("Registro de arriendo guardado");
+  } else {
+    inquilina[parseInt(index)].concepto = concepto;
+    inquilina[parseInt(index)].monto = monto;
+    inquilina[parseInt(index)].estado = estado;
+    showToast("Registro de arriendo actualizado");
+  }
+
+  cancelarEdicionInquilina();
+  guardarDatos();
+  inicializarDatos();
+}
+
+function editarInquilina(idx) {
+  const inq = inquilina[idx];
+  document.getElementById('inq-index').value = idx;
+  document.getElementById('inq-concepto').value = inq.concepto;
+  document.getElementById('inq-monto').value = inq.monto;
+  document.getElementById('inq-estado').value = inq.estado;
+
+  document.getElementById('form-inquilina-titulo').innerHTML = `<i class="ti ti-pencil"></i> Editar Registro Arriendo`;
+  document.getElementById('btn-inquilina-submit').innerText = "Actualizar Registro";
+  document.getElementById('btn-inquilina-cancelar').style.display = "inline-flex";
+}
+
+function cancelarEdicionInquilina() {
+  document.getElementById('inq-index').value = "";
+  document.getElementById('form-inquilina').reset();
+  document.getElementById('form-inquilina-titulo').innerHTML = `<i class="ti ti-file-plus"></i> Registrar Pago / Cobro`;
+  document.getElementById('btn-inquilina-submit').innerText = "Guardar Registro";
+  document.getElementById('btn-inquilina-cancelar').style.display = "none";
+}
+
+function cambiarEstadoInquilina(index) {
+  const reg = inquilina[index];
+  if (reg.estado === 'Pendiente') {
+    if (confirm(`¿Confirmar cobro de $${reg.monto.toLocaleString()} por "${reg.concepto}"?`)) {
+      reg.estado = 'Pagado';
+      ventas.push({
+        fecha: new Date().toLocaleDateString(),
+        vendedor: 'Sistema',
+        producto: `Ingreso Arriendo: ${reg.concepto}`,
+        cantidad: 1,
+        total: reg.monto
+      });
+      showToast("Estado actualizado a Pagado");
+      guardarDatos();
+      inicializarDatos();
+    }
+  }
+}
+
+function eliminarRegistroInquilina(index) {
+  if (confirm("¿Deseas eliminar este registro de arriendo?")) {
+    inquilina.splice(index, 1);
+    showToast("Registro eliminado");
+    guardarDatos();
+    inicializarDatos();
+  }
+}
+
+function renderInquilina() {
+  const tbody = document.querySelector('#tabla-inquilina tbody');
+  tbody.innerHTML = '';
+  if (inquilina.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">No hay registros de arriendo</td></tr>';
+    return;
+  }
+  inquilina.forEach((inq, idx) => {
+    const claseBadge = inq.estado === 'Pagado' ? 'badge-green' : 'badge-amber';
+    const botonAccion = inq.estado === 'Pendiente' 
+      ? `<button class="btn btn-mini btn-primary" style="margin-right:4px;" onclick="cambiarEstadoInquilina(${idx})"><i class="ti ti-check"></i> Marcar Pagado</button>`
+      : '';
+
+    tbody.innerHTML += `<tr>
+      <td>${inq.fecha}</td>
+      <td>${inq.concepto}</td>
+      <td>$${inq.monto.toLocaleString()}</td>
+      <td><span class="badge ${claseBadge}">${inq.estado}</span></td>
+      <td style="text-align:center;">
+        ${botonAccion}
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarInquilina(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarRegistroInquilina(${idx})"><i class="ti ti-trash"></i></button>
+      </td>
+    </tr>`;
+  });
+}
+
+// --- OPERACIONES: GESTIÓN DE INVENTARIO ---
+function guardarProducto(e) {
+  e.preventDefault();
+  const index = document.getElementById('i-index').value;
+  const nombre = document.getElementById('i-nombre').value.trim();
+  const stock = parseInt(document.getElementById('i-stock').value);
+  const unidad = document.getElementById('i-unidad').value;
+  const estado = document.getElementById('i-estado').value;
+
+  if (index === "") {
+    const fecha = document.getElementById('i-fecha').value;
+    inventario.push({ fecha, nombre, stock, unidad, estado });
+    showToast("Producto añadido al stock");
+  } else {
+    inventario[parseInt(index)].nombre = nombre;
+    inventario[parseInt(index)].stock = stock;
+    inventario[parseInt(index)].unidad = unidad;
+    inventario[parseInt(index)].estado = estado;
+    showToast("Producto actualizado");
+  }
+
+  cancelarEdicionProducto();
+  guardarDatos();
+  inicializarDatos();
+}
+
+function editarProducto(idx) {
+  const item = inventario[idx];
+  document.getElementById('i-index').value = idx;
+  document.getElementById('i-nombre').value = item.nombre;
+  document.getElementById('i-stock').value = item.stock;
+  document.getElementById('i-unidad').value = item.unidad;
+  document.getElementById('i-estado').value = item.estado;
+
+  document.getElementById('form-prod-titulo').innerHTML = `<i class="ti ti-pencil"></i> Editar Producto`;
+  document.getElementById('btn-prod-submit').innerText = "Actualizar Stock";
+  document.getElementById('btn-prod-cancelar').style.display = "inline-flex";
+}
+
+function cancelarEdicionProducto() {
+  document.getElementById('i-index').value = "";
+  document.getElementById('form-inventario').reset();
+  document.getElementById('form-prod-titulo').innerHTML = `<i class="ti ti-package"></i> Ingresar Producto`;
+  document.getElementById('btn-prod-submit').innerText = "Guardar en Stock";
+  document.getElementById('btn-prod-cancelar').style.display = "none";
+}
+
+function eliminarProducto(index) {
+  if (confirm("¿Estás seguro de eliminar este producto del stock?")) {
+    inventario.splice(index, 1);
+    showToast("Producto removido");
+    guardarDatos();
+    inicializarDatos();
+  }
+}
+
+function renderInventario() {
+  const tbody = document.querySelector('#tabla-inventario tbody');
+  tbody.innerHTML = '';
+  if (inventario.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" class="empty">No hay productos en inventario</td></tr>';
+    return;
+  }
+  inventario.forEach((item, idx) => {
+    let claseBadge = 'badge-green';
+    if (item.estado === 'Revisar') claseBadge = 'badge-amber';
+    if (item.estado === 'Crítico') claseBadge = 'badge-red';
+
+    tbody.innerHTML += `<tr>
+      <td>${item.fecha || '-'}</td>
+      <td>${item.nombre}</td>
+      <td>${item.stock} ${item.unidad}</td>
+      <td><span class="badge ${claseBadge}">${item.estado}</span></td>
+      <td style="text-align:center;">
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarProducto(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarProducto(${idx})"><i class="ti ti-trash"></i></button>
+      </td>
+    </tr>`;
+  });
+}
+
+// --- CALCULOS OPERACIONALES GENERALES ---
+function actualizarCalculos() {
+  let totalVentas = ventas.reduce((acc, v) => acc + v.total, 0);
+  let totalGastos = gastos.reduce((acc, g) => acc + g.monto, 0);
+  let totalDeudas = deudas.reduce((acc, d) => acc + d.monto, 0);
+  let neto = saldoAnterior + totalVentas - totalGastos;
+
+  document.getElementById('m-ing').innerText = `$${totalVentas.toLocaleString()}`;
+  document.getElementById('m-gas').innerText = `$${totalGastos.toLocaleString()}`;
+  document.getElementById('m-saldo').innerText = `$${neto.toLocaleString()}`;
+  document.getElementById('m-deu').innerText = `$${totalDeudas.toLocaleString()}`;
+  
+  document.getElementById('lbl-deudas-dashboard').innerText = `$${totalDeudas.toLocaleString()}`;
+  document.getElementById('lbl-pasivo-dashboard').innerText = `$${(gastosFijosMensuales + totalDeudas).toLocaleString()}`;
+
+  let ratio = totalDeudas > 0 ? (totalVentas / totalDeudas).toFixed(1) : totalVentas > 0 ? 'Máximo' : '0.0';
+  document.getElementById('an-ratio').innerText = ratio + 'x';
+  let eficiencia = totalVentas > 0 ? Math.round((totalGastos / totalVentas) * 100) : 0;
+  document.getElementById('an-eficiencia').innerText = eficiencia + '%';
+
+  document.getElementById('informe-texto').innerText = `En este periodo se registran ingresos totales de $${totalVentas.toLocaleString()} frente a egresos consolidados de $${totalGastos.toLocaleString()}. El rendimiento demuestra una tasa de eficiencia del gasto del ${eficiencia}%.`;
+
+  renderGraficas(totalVentas, totalGastos);
+}
+
+// --- RENDERIZACIÓN DE GRÁFICOS ---
+function renderGraficas(v, g) {
+  const v1 = ventas.filter(x => x.vendedor === 'Yuliana').reduce((a, b) => a + b.total, 0);
+  const v2 = ventas.filter(x => x.vendedor === 'Juan').reduce((a, b) => a + b.total, 0);
+  let maxVenta = Math.max(v1, v2, 1);
+
+  document.getElementById('dash-vend').innerHTML = `
+    <div class="v-col"><div class="v-bar" style="height:${(v1/maxVenta)*100}%"><span class="v-val">$${v1.toLocaleString()}</span></div><span class="v-lbl">Yuliana</span></div>
+    <div class="v-col"><div class="v-bar" style="height:${(v2/maxVenta)*100}%"><span class="v-bar-group"><span class="v-val">$${v2.toLocaleString()}</span></span></div><span class="v-lbl">Juan</span></div>
+  `;
+
+  let maxFin = Math.max(v, g, 1);
+  document.getElementById('dash-financiero').innerHTML = `
+    <div class="v-col"><div class="v-bar" style="height:${(v/maxFin)*100}%; background:var(--g)"><span class="v-val">$${v.toLocaleString()}</span></div><span class="v-lbl">Ingresos</span></div>
+    <div class="v-col"><div class="v-bar" style="height:${(g/maxFin)*100}%; background:var(--red)"><span class="v-val">$${g.toLocaleString()}</span></div><span class="v-lbl">Gastos</span></div>
+  `;
+}
+
+// --- NAVEGACIÓN Y COMPORTAMIENTO UI ---
+document.querySelectorAll('.sidebar .nav-item[data-page]').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+
+    const pageId = this.getAttribute('data-page');
+    
+    document.querySelectorAll('.main .page').forEach(p => {
+      p.classList.remove('active');
+      p.style.display = 'none';
+    });
+    
+    const paginaDestino = document.getElementById(`page-${pageId}`);
+    if (paginaDestino) {
+      paginaDestino.classList.add('active');
+      paginaDestino.style.display = 'block';
+    }
+    
+    document.getElementById('topbar-title').innerText = this.getAttribute('data-title');
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  });
+});
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.innerText = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function mostrarModalCierreManual() { document.getElementById('modal-cierre').classList.add('open'); }
+function ocultarModalCierre() { document.getElementById('modal-cierre').classList.remove('open'); }
+function procesarCierreMes() {
+  ocultarModalCierre();
+  showToast("Mes cerrado y guardado correctamente en el histórico.");
+  ventas = []; gastos = []; deudas = []; arqueoCaja = []; inquilina = []; inventario = [];
+  guardarDatos();
+  inicializarDatos();
+}
+
+window.onload = function () {
+  inicializarDatos();
+};
+
+function renderGraficoFinanciero() {
+
+    const ventasTotal =
+        ventas.reduce((acc,v)=>acc + Number(v.total || 0),0);
+
+    const gastosTotal =
+        gastos.reduce((acc,g)=>acc + Number(g.monto || 0),0);
+
+    const deudasTotal =
+        deudas.reduce((acc,d)=>acc + Number(d.monto || 0),0);
+
+    const inventarioTotal =
+        inventario.reduce((acc,i)=>acc + Number(i.stock || 0),0);
+
+    const chart =
+        document.getElementById('chart-ventas-gastos');
+
+    if(!chart) return;
+
+    const max =
+        Math.max(
+            ventasTotal,
+            gastosTotal,
+            deudasTotal,
+            inventarioTotal,
+            1
+        );
+
+    chart.innerHTML = `
+        <div class="v-col">
+            <div class="v-bar"
+                 style="height:${(ventasTotal/max)*180}px">
+                <span class="v-val">$${ventasTotal.toLocaleString()}</span>
+            </div>
+            <div class="v-lbl">Ventas</div>
+        </div>
+
+        <div class="v-col">
+            <div class="v-bar"
+                 style="height:${(gastosTotal/max)*180}px;background:#ef4444">
+                <span class="v-val">$${gastosTotal.toLocaleString()}</span>
+            </div>
+            <div class="v-lbl">Gastos</div>
+        </div>
+
+        <div class="v-col">
+            <div class="v-bar"
+                 style="height:${(deudasTotal/max)*180}px;background:#f59e0b">
+                <span class="v-val">$${deudasTotal.toLocaleString()}</span>
+            </div>
+            <div class="v-lbl">Deudas</div>
+        </div>
+
+        <div class="v-col">
+            <div class="v-bar"
+                 style="height:${(inventarioTotal/max)*180}px;background:#10b981">
+                <span class="v-val">${inventarioTotal}</span>
+            </div>
+            <div class="v-lbl">Inventario</div>
+        </div>
+    `;
+}
+
+</script>
+</body>
+</html> 
