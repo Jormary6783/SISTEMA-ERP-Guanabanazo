@@ -921,10 +921,18 @@ function colocarFechaActual() {
   });
 }
 
-function inicializarDatos() {
+ async function inicializarDatos(){
+
   colocarFechaActual();
 
-  cargarDatos();
+    cargarDatos(); // carga los datos antiguos
+
+  try {
+    await cargarDatosFirebase(); // luego intenta cargar Firebase
+  } catch(error) {
+    console.error("Error Firebase:", error);
+  }
+
   actualizarCalculos();
   renderVentas();
   renderGastos();
@@ -1501,7 +1509,7 @@ function renderInquilina() {
 }
 
 // --- OPERACIONES: GESTIÓN DE INVENTARIO ---
-function guardarProducto(e) {
+async function guardarProducto(e) {
   e.preventDefault();
   const index = document.getElementById('i-index').value;
   const nombre = document.getElementById('i-nombre').value.trim();
@@ -1535,6 +1543,8 @@ inventario.push({
 
   cancelarEdicionProducto();
   guardarDatos();
+   await guardarDatosFirebase();
+
   inicializarDatos();
 }
 
@@ -1771,6 +1781,111 @@ function renderGraficoFinanciero() {
         </div>
     `;
 }
+
+async function guardarDatosFirebase() {
+
+  await setDoc(
+    doc(db, "erp", "datos"),
+    {
+      ventas,
+      gastos,
+      deudas,
+      arqueoCaja,
+      inquilina,
+      inventario,
+      saldoAnterior
+    }
+  );
+
+}
+
+async function cargarDatosFirebase() {
+ console.log("Entrando a Firebase");
+
+  const snap =
+    await getDoc(
+      doc(db, "erp", "datos")
+    );
+
+     console.log("Documento encontrado:", snap.exists());
+  if (!snap.exists()){
+    console.log("No existe documento");
+  return;
+  }
+  const data = snap.data();
+
+   console.log("Datos Firebase:", data);
+
+  ventas = data.ventas || [];
+  gastos = data.gastos || [];
+  deudas = data.deudas || [];
+  arqueoCaja = data.arqueoCaja || [];
+  inquilina = data.inquilina || [];
+  inventario = data.inventario || [];
+  saldoAnterior = data.saldoAnterior || 0;
+
+} 
+ 
+ console.log("Datos enviados a Firebase");
+
+</script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  onSnapshot,
+   
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB8OKaF1yD_wIckeQOoKiQfwidHzolU850",
+  authDomain: "sistema-guanabanazo.firebaseapp.com",
+  projectId: "sistema-guanabanazo",
+  storageBucket: "sistema-guanabanazo.firebasestorage.app",
+  messagingSenderId: "282991095400",
+  appId: "1:282991095400:web:a518df29b8b706194bd5dd"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
+window.getDoc = getDoc;
+window.setDoc = setDoc;
+window.doc = doc;
+
+onSnapshot(
+  doc(db, "erp", "datos"),
+  (snap) => {
+
+    if (!snap.exists()) return;
+
+    const data = snap.data();
+
+    ventas = data.ventas || [];
+    gastos = data.gastos || [];
+    deudas = data.deudas || [];
+    arqueoCaja = data.arqueoCaja || [];
+    inquilina = data.inquilina || [];
+    inventario = data.inventario || [];
+    saldoAnterior = data.saldoAnterior || 0;
+
+    actualizarCalculos();
+    renderVentas();
+    renderGastos();
+    renderDeudas();
+    renderArqueo();
+    renderInquilina();
+    renderInventario();
+    renderGraficoFinanciero();
+
+    console.log("Datos sincronizados");
+  }
+);
 
 </script>
 </body>
