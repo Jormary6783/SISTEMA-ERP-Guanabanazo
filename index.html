@@ -250,6 +250,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
 
   <div class="nav-sec">Sistema</div>
   <a href="#" class="nav-item" data-page="historial" data-title="Meses cerrados"><i class="ti ti-archive"></i>Meses cerrados</a>
+ <a href="#" class="nav-item" onclick="exportarBackup()"> <i class="ti ti-download"></i>Exportar Respaldo</a>
   <a href="#" class="nav-item" onclick="mostrarModalCierreManual()" style="color:var(--amber)"><i class="ti ti-calendar-off" style="color:var(--amber)"></i>Cerrar mes</a>
   <a href="#" class="nav-item" onclick="cerrarSesion()" style="color:var(--red); margin-top:10px; border-top:0.5px solid var(--border); padding-top:12px;"><i class="ti ti-logout" style="color:var(--red)"></i>Cerrar Sesión</a>
 </nav>
@@ -851,6 +852,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
     </div>
   </div>
 </div>
+
+
 
 <script>
 // --- DATOS GLOBALES EN MEMORIA ---
@@ -1626,6 +1629,8 @@ tbody.innerHTML += `<tr>
   });
 }
 
+
+
 // --- CALCULOS OPERACIONALES GENERALES ---
 function actualizarCalculos() {
   let totalVentas = ventas.reduce((acc, v) => acc + v.total, 0);
@@ -1874,19 +1879,39 @@ onSnapshot(
     inventario = data.inventario || [];
     saldoAnterior = data.saldoAnterior || 0;
 
-    actualizarCalculos();
-    renderVentas();
-    renderGastos();
-    renderDeudas();
-    renderArqueo();
-    renderInquilina();
-    renderInventario();
-    renderGraficoFinanciero();
+    // Datos sincronizados
+  });
 
-    console.log("Datos sincronizados");
-  }
-);
+// Datos enviados a Firebase
+
+function exportarBackup() {
+  console.log("Exportando respaldo...");
+  const datos = {
+    ventas,
+    gastos,
+    deudas,
+    inventario,
+    arqueoCaja,
+    saldoAnterior
+  };
+
+  const blob = new Blob(
+    [JSON.stringify(datos, null, 2)],
+    { type: "application/json" }
+  );
+
+  const a = document.createElement("a");
+
+  a.href = URL.createObjectURL(blob);
+
+  a.download =
+    `ERP_Backup_${new Date().toISOString().split("T")[0]}.json`;
+
+  a.click();
+
+  showToast("Respaldo descargado");
+}
 
 </script>
 </body>
-</html> 
+</html>
