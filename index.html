@@ -78,13 +78,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* --- CONTROL DE VISIBILIDAD --- */
 .erp{display:none;min-height:100vh} 
 
-.sidebar{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;padding:16px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;
+  padding:16px 0;position:sticky;top:0;height:100vh;overflow-y:auto}
 .logo{padding:0 16px 16px;border-bottom:0.5px solid var(--border);margin-bottom:12px}
 .logo-name{font-size:15px;font-weight:500}
 .logo-sub{font-size:11px;color:var(--text3)}
 .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--g);display:inline-block;margin-right:6px}
 .nav-sec{padding:0 8px 4px;font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:10px 8px 4px}
-.nav-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--radius);cursor:pointer;font-size:13px;color:var(--text2);margin:0 8px 2px;transition:background .15s;user-select:none;text-decoration:none}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--radius);cursor:pointer;font-size:13px;color:var(--text2);
+  margin:0 8px 2px;transition:background .15s;user-select:none;text-decoration:none}
 .nav-item:hover{background:var(--bg)}
 .nav-item.active{background:var(--bg);color:var(--text);font-weight:500}
 .nav-item.active i,.nav-item:hover i{color:var(--g)}
@@ -116,29 +118,34 @@ tfoot td{font-weight:600;background:var(--bg2);padding:8px}
 .badge-red{background:#FCEBEB;color:#791F1F}
 .badge-blue{background:#E6F1FB;color:#185FA5}
 .badge-gray{background:var(--bg2);color:var(--text3)}
-input,select,textarea{background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 10px;width:100%;outline:none;transition:border-color .15s}
+input,select,textarea{background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;border:0.5px solid var
+  (--border2);border-radius:var(--radius);padding:7px 10px;width:100%;outline:none;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{border-color:var(--g)}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
 .fr{display:flex;flex-direction:column;gap:4px}
 .fr label{font-size:11px;color:var(--text2);font-weight:500}
-.btn{border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 14px;cursor:pointer;font-size:13px;background:transparent;color:var(--text);transition:background .15s;display:inline-flex;align-items:center;gap:5px}
+.btn{border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 14px;cursor:pointer;font-size:13px;background:transparent;
+  color:var(--text);transition:background .15s;display:inline-flex;align-items:center;gap:5px}
 .btn:hover{background:var(--bg2)}
 .btn-primary{background:var(--g);color:#fff;border-color:var(--g)}
 .btn-primary:hover{background:var(--g2);border-color:var(--g2)}
 .btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .sep{height:0.5px;background:var(--border);margin:16px 0}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.toast{position:fixed;bottom:20px;right:20px;background:var(--g);color:#fff;padding:10px 16px;border-radius:var(--radius);font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--g);color:#fff;padding:10px 16px;border-radius:var(--radius);font-size:13px;
+  opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999}
 .toast.show{opacity:1}
 .sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .empty{text-align:center;padding:32px;color:var(--text3);font-size:13px}
 .srow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border)}
 .srow:last-child{border-bottom:none}
-.savatar{width:32px;height:32px;border-radius:50%;background:var(--g3);color:var(--g2);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:12px;flex-shrink:0}
+.savatar{width:32px;height:32px;border-radius:50%;background:var(--g3);color:var(--g2);display:flex;align-items:center;justify-content:center;
+  font-weight:500;font-size:12px;flex-shrink:0}
 .drow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--border)}
 .drow:last-child{border-bottom:none}
-.topbar{display:none;padding:12px 16px;background:var(--bg2);border-bottom:0.5px solid var(--border);align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar{display:none;padding:12px 16px;background:var(--bg2);border-bottom:0.5px solid var(--border);align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:50}
 .topbar-title{font-size:14px;font-weight:500}
 .hamburger{background:none;border:none;cursor:pointer;padding:4px;color:var(--text)}
 .mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100}
@@ -149,7 +156,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
 
 /* Estilos de la tabla de arqueo tipo Excel */
 .excel-table { width: 100%; border: 1.5px solid #1D9E75; font-family: inherit; margin-top: 10px; background: #fff; }
-.excel-header { background: #52D69B; color: #000; font-weight: bold; text-align: center; font-size: 14px; padding: 6px; border: 1px solid #1D9E75; }
+.excel-header { background: #52D69B; color: #000; font-weight: bold; text-align: center; font-size: 14px; padding: 6px; border:
+   1px solid #1D9E75; }
 .excel-th { background: #52D69B; color: #000; font-weight: bold; text-align: center; border: 1px solid #1D9E75; padding: 6px; }
 .excel-td { border: 1px solid #cbd5e1; padding: 6px; color: #000; }
 .excel-td-center { text-align: center; }
@@ -159,14 +167,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
 .excel-row-faltante { font-weight: bold; background: #fef2f2; color: #991b1b; }
 
 /* GRÁFICAS DE BARRAS VERTICALES */
-.v-chart{display:flex;align-items:flex-end;justify-content:space-around;height:200px;padding:10px 0 24px;border-bottom:1px solid var(--border);position:relative;margin-top:15px;gap:10px}
+.v-chart{display:flex;align-items:flex-end;justify-content:space-around;height:200px;padding:10px 0 24px;border-bottom:1px solid var(--border);
+  position:relative;margin-top:15px;gap:10px}
 .v-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end;position:relative}
-.v-bar{width:70%;max-width:45px;background:var(--g);border-radius:4px 4px 0 0;min-height:4px;transition:height 0.5s ease;position:relative;display:flex;justify-content:center}
+.v-bar{width:70%;max-width:45px;background:var(--g);border-radius:4px 4px 0 0;min-height:4px;transition:height 0.5s ease;position:relative;
+  display:flex;justify-content:center}
 .v-bar-group{display:flex;gap:4px;width:100%;justify-content:center;align-items:flex-end;height:100%}
-.v-bar-item{width:22px;border-radius:3px 3px 0 0;min-height:4px;transition:height 0.5s ease;position:relative;display:flex;justify-content:center}
+.v-bar-item{width:22px;border-radius:3px 3px 0 0;min-height:4px;transition:height 0.5s ease;position:relative;display:flex;
+  justify-content:center}
 .v-val{position:absolute;top:-20px;font-size:10px;font-weight:600;color:var(--text);white-space:nowrap}
 .v-col:hover .v-val { display: block; }
-.v-lbl{position:absolute;bottom:-24px;font-size:11px;color:var(--text2);text-align:center;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.v-lbl{position:absolute;bottom:-24px;font-size:11px;color:var(--text2);text-align:center;width:100%;text-overflow:ellipsis;overflow:hidden;
+  white-space:nowrap}
 
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:200;padding:16px}
 .modal.open{display:flex}
@@ -251,8 +263,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
   <div class="nav-sec">Sistema</div>
   <a href="#" class="nav-item" data-page="historial" data-title="Meses cerrados"><i class="ti ti-archive"></i>Meses cerrados</a>
  <a href="#" class="nav-item" onclick="exportarBackup()"> <i class="ti ti-download"></i>Exportar Respaldo</a>
-  <a href="#" class="nav-item" onclick="mostrarModalCierreManual()" style="color:var(--amber)"><i class="ti ti-calendar-off" style="color:var(--amber)"></i>Cerrar mes</a>
-  <a href="#" class="nav-item" onclick="cerrarSesion()" style="color:var(--red); margin-top:10px; border-top:0.5px solid var(--border); padding-top:12px;"><i class="ti ti-logout" style="color:var(--red)"></i>Cerrar Sesión</a>
+  <a href="#" class="nav-item" onclick="mostrarModalCierreManual()" style="color:var(--amber)"><i class="ti ti-calendar-off" 
+    style="color:var(--amber)"></i>Cerrar mes</a>
+  <a href="#" class="nav-item" onclick="cerrarSesion()" style="color:var(--red); margin-top:10px; border-top:0.5px solid var(--border); 
+  padding-top:12px;"><i class="ti ti-logout" style="color:var(--red)"></i>Cerrar Sesión</a>
 </nav>
 
 <main class="main">
@@ -267,10 +281,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
     <div class="page-title">Resumen del negocio</div>
     <div class="page-sub">Guanabanazo 2026 — vista general</div>
     <div class="metrics">
-      <div class="metric"><div class="metric-label">Ingresos totales</div><div class="metric-val green" id="m-ing">$0</div><div class="metric-tag">Total entradas</div></div>
-      <div class="metric"><div class="metric-label">Gastos totales</div><div class="metric-val red" id="m-gas">$0</div><div class="metric-tag">Total salidas</div></div>
-      <div class="metric"><div class="metric-label">Saldo neto</div><div class="metric-val" id="m-saldo">$0</div><div class="metric-tag">Saldo anterior incluido</div></div>
-      <div class="metric"><div class="metric-label">Total deudas</div><div class="metric-val amber" id="m-deu">$0</div><div class="metric-tag">Cuentas por pagar</div></div>
+      <div class="metric"><div class="metric-label">Ingresos totales</div><div class="metric-val green" id="m-ing">$0</div>
+      <div class="metric-tag">Total entradas</div></div>
+      <div class="metric"><div class="metric-label">Gastos totales</div><div class="metric-val red" id="m-gas">$0</div>
+      <div class="metric-tag">Total salidas</div></div>
+      <div class="metric"><div class="metric-label">Saldo neto</div><div class="metric-val" id="m-saldo">$0</div>
+      <div class="metric-tag">Saldo anterior incluido</div></div>
+      <div class="metric"><div class="metric-label">Total deudas</div><div class="metric-val amber" id="m-deu">$0</div>
+      <div class="metric-tag">Cuentas por pagar</div></div>
     </div>
     
     <div class="two-col">
@@ -289,9 +307,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
       <div class="card-title"><i class="ti ti-alert-triangle"></i>Situación financiera base (Valores)</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
         <div class="metric"><div class="metric-label">Gastos mensuales fijos</div><div class="metric-val red">$1.065.000</div></div>
-        <div class="metric"><div class="metric-label">Total deudas vigentes</div><div class="metric-val amber" id="lbl-deudas-dashboard">$0</div></div>
+        <div class="metric"><div class="metric-label">Total deudas vigentes</div>
+        <div class="metric-val amber" id="lbl-deudas-dashboard">$0</div></div>
         <div class="metric"><div class="metric-label">Pasivo total</div><div class="metric-val red" id="lbl-pasivo-dashboard">$0</div></div>
-        <div class="metric"><div class="metric-label">Saldo anterior</div><div class="metric-val green" id="lbl-saldo-anterior">$126.000</div></div>
+        <div class="metric"><div class="metric-label">Saldo anterior</div><div class="metric-val green" id="lbl-saldo-anterior">$126.000</div>
+      </div>
       </div>
     </div>
   </div>
@@ -343,6 +363,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
         <div class="card-title" id="form-venta-titulo"><i class="ti ti-plus"></i>Nueva Venta</div>
         <form id="form-venta" onsubmit="guardarVenta(event)">
           <input type="hidden" id="v-index" value="">
+          <div class="fr" style="margin-bottom:12px">
+            <label>Fecha</label>
+            <input type="date" id="v-fecha" required>
+          </div>
           <div class="fg">
             <div class="fr">
               <label>Vendedor</label>
@@ -355,10 +379,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
               <label>Producto / Concepto</label>
               <input type="text" id="v-producto" placeholder="Ej: Guanábana Premium" required>
             </div>
-          </div>
-          <div class="fr">
-             <label>Fecha</label>
-             <input type="date" id="v-fecha" required>
           </div>
           <div class="fg">
             <div class="fr">
@@ -406,11 +426,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
         <form id="form-gasto" onsubmit="guardarGasto(event)">
           <input type="hidden" id="g-index" value="">
           <div class="fr" style="margin-bottom:12px">
-            <label>Concepto / Detalle</label>
-          <div class="fr" style="margin-bottom:12px">
             <label>Fecha</label>
             <input type="date" id="g-fecha" required>
-          </div>  
+          </div>
+          <div class="fr" style="margin-bottom:12px">
+            <label>Concepto / Detalle</label>
             <input type="text" id="g-concepto" placeholder="Ej: Pago de Luz" required>
           </div>
           <div class="fg">
@@ -428,7 +448,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
             </div>
           </div>
           <div class="btn-row">
-            <button type="submit" class="btn btn-primary" id="btn-gasto-submit" style="background:var(--red); border-color:var(--red)">Guardar Egreso</button>
+            <button type="submit" class="btn btn-primary" id="btn-gasto-submit" style="background:var(--red); 
+            border-color:var(--red)">Guardar Egreso</button>
             <button type="button" class="btn" id="btn-gasto-cancelar" style="display:none;" onclick="cancelarEdicionGasto()">Cancelar</button>
           </div>
         </form>
@@ -494,7 +515,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
 
       <div class="card">
         <div class="card-title"><i class="ti ti-eye"></i> Vista Previa del Comprobante</div>
-        <div id="factura-pdf-area" style="background: #fff; color: #000; padding: 20px; border: 1px solid #ddd; border-radius: var(--radius); font-family: monospace; font-size: 12px; line-height: 1.5;">
+        <div id="factura-pdf-area" style="background: #fff; color: #000; padding: 20px; border: 1px solid #ddd; border-radius: 
+        var(--radius); font-family: monospace; font-size: 12px; line-height: 1.5;">
           <div style="text-align: center; margin-bottom: 15px;">
             <h3 style="margin: 0; font-size: 16px; text-transform: uppercase;">Guanabanazo 2026</h3>
             <p style="margin: 2px 0;">NIT: 123456789-0</p>
@@ -517,7 +539,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
             </thead>
             <tbody id="fact-preview-items">
               <tr>
-                <td colspan="2" style="text-align: center; padding: 15px; color: #777;" id="fact-vacia-msg">No hay productos en la factura</td>
+                <td colspan="2" style="text-align: center; padding: 15px; 
+                color: #777;" id="fact-vacia-msg">No hay productos en la factura</td>
               </tr>
             </tbody>
           </table>
@@ -550,11 +573,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
         <form id="form-inventario" onsubmit="guardarProducto(event)">
           <input type="hidden" id="i-index" value="">
           <div class="fr" style="margin-bottom:12px">
-            <label>Nombre del Producto</label>
-          <div class="fr" style="margin-bottom:12px">
             <label>Fecha de ingreso</label>
             <input type="date" id="i-fecha" required>
-          </div>  
+          </div>
+          <div class="fr" style="margin-bottom:12px">
+            <label>Nombre del Producto</label>
             <input type="text" id="i-nombre" placeholder="Ej: Guanábana Pulpa" required>
           </div>
           <div class="fg3">
@@ -607,10 +630,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
                 <th>Fecha</th>
                 <th>Producto</th>
                 <th>Stock Disponible</th>
-                 <th>Precio Unitario</th>
-                 <th>Valor Total</th>
+                <th>Precio Unitario</th>
+                <th>Valor Total</th>
                 <th>Estado</th>
-                 <th>Acciones</th>
                 <th style="text-align:center; width:110px;">Acciones</th>
               </tr>
             </thead>
@@ -700,10 +722,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
         <form id="form-deudas" onsubmit="guardarDeuda(event)">
           <input type="hidden" id="d-index" value="">
           <div class="fr" style="margin-bottom:12px">
-          <div class="fr" style="margin-bottom:12px">
             <label>Fecha de Registro</label>
             <input type="date" id="d-fecha" required>
-          </div>  
+          </div>
+          <div class="fr" style="margin-bottom:12px">
             <label>Acreedor / Proveedor</label>
             <input type="text" id="d-acreedor" placeholder="Ej: Distribuidora de Frutas S.A." required>
           </div>
@@ -739,8 +761,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
     <div class="page-title">Análisis de Rendimiento Financiero</div>
     <div class="page-sub">Ratios e indicadores de salud operacional</div>
     <div class="metrics">
-      <div class="metric"><div class="metric-label">Ratio de Cobertura</div><div class="metric-val" id="an-ratio">0.0x</div><div class="metric-tag">Ingresos / Pasivos</div></div>
-      <div class="metric"><div class="metric-label">Eficiencia de Gasto</div><div class="metric-val" id="an-eficiencia">0%</div><div class="metric-tag">Gastos vs Ingresos</div></div>
+      <div class="metric"><div class="metric-label">Ratio de Cobertura</div><div class="metric-val" id="an-ratio">0.0x</div>
+      <div class="metric-tag">Ingresos / Pasivos</div></div>
+      <div class="metric"><div class="metric-label">Eficiencia de Gasto</div><div class="metric-val" id="an-eficiencia">0%</div>
+      <div class="metric-tag">Gastos vs Ingresos</div></div>
     </div>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
       <div class="card">
@@ -806,7 +830,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
           </div>
           <div class="btn-row">
             <button type="submit" class="btn btn-primary" id="btn-inquilina-submit">Guardar Registro</button>
-            <button type="button" class="btn" id="btn-inquilina-cancelar" style="display:none;" onclick="cancelarEdicionInquilina()">Cancelar</button>
+            <button type="button" class="btn" id="btn-inquilina-cancelar" style="display:none;" 
+            onclick="cancelarEdicionInquilina()">Cancelar</button>
           </div>
         </form>
       </div>
@@ -845,10 +870,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--g)}
 <div class="modal" id="modal-cierre">
   <div class="modal-content">
     <div class="card-title" style="color:var(--amber)"><i class="ti ti-alert-triangle"></i> ¿Cerrar mes actual?</div>
-    <p style="font-size:13px; color:var(--text2); margin-bottom:15px;">Esta acción archivará de forma permanente los ingresos y egresos actuales en el historial.</p>
+    <p style="font-size:13px; color:var(--text2); 
+    margin-bottom:15px;">Esta acción archivará de forma permanente los ingresos y egresos actuales en el historial.</p>
     <div class="btn-row" style="justify-content: flex-end;">
       <button class="btn" onclick="ocultarModalCierre()">Cancelar</button>
-      <button class="btn btn-primary" style="background:var(--amber); border-color:var(--amber)" onclick="procesarCierreMes()">Confirmar Cierre</button>
+      <button class="btn btn-primary" style="background:var(--amber);
+       border-color:var(--amber)" onclick="procesarCierreMes()">Confirmar Cierre</button>
     </div>
   </div>
 </div>
@@ -977,7 +1004,8 @@ function actualizarVistaPreviaFactura() {
     tbody.innerHTML = '';
 
     if (itemsFacturaActual.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="2" style="text-align: center; padding: 15px; color: #777;">No hay productos en la factura</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="2" style="text-align: center; padding: 15px; 
+          color: #777;">No hay productos en la factura</td></tr>`;
         document.getElementById('fact-preview-total').innerText = "$0";
         return;
     }
@@ -1034,7 +1062,7 @@ function descargarFacturaPDF() {
 }
 
 // --- OPERACIONES: GESTIÓN DE VENTAS ---
-function guardarVenta(e) {
+async function guardarVenta(e) {
   e.preventDefault();
   const index = document.getElementById('v-index').value;
   const vendedor = document.getElementById('v-vendedor').value;
@@ -1060,6 +1088,7 @@ ventas.push({
   
   cancelarEdicionVenta();
   guardarDatos();
+  await guardarDatosFirebase();
   inicializarDatos();
 }
 
@@ -1084,11 +1113,12 @@ function cancelarEdicionVenta() {
   document.getElementById('btn-venta-cancelar').style.display = "none";
 }
 
-function eliminarVenta(index) {
+async function eliminarVenta(index) {
   if (confirm("¿Estás seguro de eliminar esta venta?")) {
     ventas.splice(index, 1);
     showToast("Venta eliminada");
     guardarDatos();
+    await guardarDatosFirebase();
     inicializarDatos();
   }
 }
@@ -1108,7 +1138,8 @@ function renderVentas() {
       <td>${v.cantidad}</td>
       <td>$${v.total.toLocaleString()}</td>
       <td style="text-align:center;">
-        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber);" onclick="editarVenta(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber);
+        " onclick="editarVenta(${idx})"><i class="ti ti-pencil"></i></button>
         <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarVenta(${idx})"><i class="ti ti-trash"></i></button>
       </td>
     </tr>`;
@@ -1116,7 +1147,7 @@ function renderVentas() {
 }
 
 // --- OPERACIONES: GESTIÓN DE GASTOS ---
-function guardarGasto(e) {
+async function guardarGasto(e) {
   e.preventDefault();
   const index = document.getElementById('g-index').value;
   const concepto = document.getElementById('g-concepto').value.trim();
@@ -1138,6 +1169,7 @@ gastos.push({
 
   cancelarEdicionGasto();
   guardarDatos();
+  await guardarDatosFirebase();
   inicializarDatos();
 }
 
@@ -1161,11 +1193,12 @@ function cancelarEdicionGasto() {
   document.getElementById('btn-gasto-cancelar').style.display = "none";
 }
 
-function eliminarGasto(index) {
+async function eliminarGasto(index) {
   if (confirm("¿Estás seguro de eliminar este egreso?")) {
     gastos.splice(index, 1);
     showToast("Egreso eliminado");
     guardarDatos();
+    await guardarDatosFirebase();
     inicializarDatos();
   }
 }
@@ -1184,7 +1217,8 @@ function renderGastos() {
       <td><span class="badge ${g.categoria === 'Fijo'?'badge-red':'badge-amber'}">${g.categoria}</span></td>
       <td>$${g.monto.toLocaleString()}</td>
       <td style="text-align:center;">
-        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber);" onclick="editarGasto(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber);
+        " onclick="editarGasto(${idx})"><i class="ti ti-pencil"></i></button>
         <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarGasto(${idx})"><i class="ti ti-trash"></i></button>
       </td>
     </tr>`;
@@ -1192,7 +1226,7 @@ function renderGastos() {
 }
 
 // --- OPERACIONES: CONTABILIDAD DE DEUDAS ---
-function guardarDeuda(e) {
+async function guardarDeuda(e) {
   e.preventDefault();
   const index = document.getElementById('d-index').value;
   const acreedor = document.getElementById('d-acreedor').value.trim();
@@ -1215,6 +1249,7 @@ deudas.push({
 
   cancelarEdicionDeuda();
   guardarDatos();
+  await guardarDatosFirebase();
   inicializarDatos();
 }
 
@@ -1237,16 +1272,17 @@ function cancelarEdicionDeuda() {
   document.getElementById('btn-deuda-cancelar').style.display = "none";
 }
 
-function eliminarDeuda(index) {
+async function eliminarDeuda(index) {
   if (confirm("¿Estás seguro de eliminar esta cuenta pendiente por completo?")) {
     deudas.splice(index, 1);
     showToast("Deuda removida");
     guardarDatos();
+    await guardarDatosFirebase();
     inicializarDatos();
   }
 }
 
-function abonarDeuda(index) {
+async function abonarDeuda(index) {
   const deuda = deudas[index];
   const valorAbono = prompt(`Monto actual pendiente con "${deuda.acreedor}": $${deuda.monto.toLocaleString()}\n\n¿Cuánto deseas abonar? ($)`);
   
@@ -1281,6 +1317,7 @@ gastos.push({
   }
 
   guardarDatos();
+  await guardarDatosFirebase();
   inicializarDatos();
 }
 
@@ -1299,7 +1336,8 @@ function renderDeudas() {
         <button class="btn btn-mini btn-primary" style="margin-right:4px;" onclick="abonarDeuda(${idx})">
           <i class="ti ti-cash"></i> Abonar
         </button>
-        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarDeuda(${idx})">
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" 
+        onclick="editarDeuda(${idx})">
           <i class="ti ti-pencil"></i>
         </button>
         <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarDeuda(${idx})"><i class="ti ti-trash"></i></button>
@@ -1309,7 +1347,7 @@ function renderDeudas() {
 }
 
 // --- OPERACIONES: ARQUEO DE CAJA ---
-function guardarRegistroArqueo(e) {
+async function guardarRegistroArqueo(e) {
   e.preventDefault();
   const index = document.getElementById('arq-index').value;
   const clasificacion = document.getElementById('arq-clasificacion').value.trim();
@@ -1328,6 +1366,7 @@ function guardarRegistroArqueo(e) {
 
   cancelarEdicionArqueo();
   guardarDatos();
+  await guardarDatosFirebase();
   inicializarDatos();
 }
 
@@ -1351,11 +1390,12 @@ function cancelarEdicionArqueo() {
   document.getElementById('btn-arqueo-cancelar').style.display = "none";
 }
 
-function eliminarArqueo(index) {
+async function eliminarArqueo(index) {
   if (confirm("¿Deseas remover este registro de la caja física?")) {
     arqueoCaja.splice(index, 1);
     showToast("Registro removido");
     guardarDatos();
+    await guardarDatosFirebase();
     inicializarDatos();
   }
 }
@@ -1371,14 +1411,16 @@ function renderArqueo() {
       <td class="excel-td">${a.clasificacion} (${a.tipo})</td>
       <td class="excel-td-right">$${a.total.toLocaleString()}</td>
       <td class="excel-td-center">
-        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarArqueo(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;"
+         onclick="editarArqueo(${idx})"><i class="ti ti-pencil"></i></button>
         <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarArqueo(${idx})"><i class="ti ti-trash"></i></button>
       </td>
     </tr>`;
   });
 
   if(arqueoCaja.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="3" class="excel-td excel-td-center" style="color:#777;">Ningún efectivo ingresado en el arqueo físico.</td></tr>';
+    tbody.innerHTML = 
+    '<tr><td colspan="3" class="excel-td excel-td-center" style="color:#777;">Ningún efectivo ingresado en el arqueo físico.</td></tr>';
   }
 
   let totalSistema = ventas.reduce((acc, v) => acc + v.total, 0);
@@ -1405,7 +1447,7 @@ function renderArqueo() {
 }
 
 // --- OPERACIONES: CONTROL DE INQUILINA ---
-function guardarRegistroInquilina(e) {
+async function guardarRegistroInquilina(e) {
   e.preventDefault();
   const index = document.getElementById('inq-index').value;
   const concepto = document.getElementById('inq-concepto').value.trim();
@@ -1433,6 +1475,7 @@ function guardarRegistroInquilina(e) {
 
   cancelarEdicionInquilina();
   guardarDatos();
+  await guardarDatosFirebase();
   inicializarDatos();
 }
 
@@ -1456,7 +1499,7 @@ function cancelarEdicionInquilina() {
   document.getElementById('btn-inquilina-cancelar').style.display = "none";
 }
 
-function cambiarEstadoInquilina(index) {
+async function cambiarEstadoInquilina(index) {
   const reg = inquilina[index];
   if (reg.estado === 'Pendiente') {
     if (confirm(`¿Confirmar cobro de $${reg.monto.toLocaleString()} por "${reg.concepto}"?`)) {
@@ -1470,16 +1513,18 @@ function cambiarEstadoInquilina(index) {
       });
       showToast("Estado actualizado a Pagado");
       guardarDatos();
+      await guardarDatosFirebase();
       inicializarDatos();
     }
   }
 }
 
-function eliminarRegistroInquilina(index) {
+async function eliminarRegistroInquilina(index) {
   if (confirm("¿Deseas eliminar este registro de arriendo?")) {
     inquilina.splice(index, 1);
     showToast("Registro eliminado");
     guardarDatos();
+    await guardarDatosFirebase();
     inicializarDatos();
   }
 }
@@ -1494,7 +1539,8 @@ function renderInquilina() {
   inquilina.forEach((inq, idx) => {
     const claseBadge = inq.estado === 'Pagado' ? 'badge-green' : 'badge-amber';
     const botonAccion = inq.estado === 'Pendiente' 
-      ? `<button class="btn btn-mini btn-primary" style="margin-right:4px;" onclick="cambiarEstadoInquilina(${idx})"><i class="ti ti-check"></i> Marcar Pagado</button>`
+      ? `<button class="btn btn-mini btn-primary" style="margin-right:4px;" onclick="cambiarEstadoInquilina(${idx})">
+        <i class="ti ti-check"></i> Marcar Pagado</button>`
       : '';
 
     tbody.innerHTML += `<tr>
@@ -1504,7 +1550,8 @@ function renderInquilina() {
       <td><span class="badge ${claseBadge}">${inq.estado}</span></td>
       <td style="text-align:center;">
         ${botonAccion}
-        <button class="btn btn-mini btn-primary" style="background:var(--amber); border-color:var(--amber); margin-right:4px;" onclick="editarInquilina(${idx})"><i class="ti ti-pencil"></i></button>
+        <button class="btn btn-mini btn-primary" style="background:var(--amber);
+         border-color:var(--amber); margin-right:4px;" onclick="editarInquilina(${idx})"><i class="ti ti-pencil"></i></button>
         <button class="btn btn-mini" style="color:var(--red)" onclick="eliminarRegistroInquilina(${idx})"><i class="ti ti-trash"></i></button>
       </td>
     </tr>`;
@@ -1572,11 +1619,12 @@ function cancelarEdicionProducto() {
   document.getElementById('btn-prod-cancelar').style.display = "none";
 }
 
-function eliminarProducto(index) {
+async function eliminarProducto(index) {
   if (confirm("¿Estás seguro de eliminar este producto del stock?")) {
     inventario.splice(index, 1);
     showToast("Producto removido");
     guardarDatos();
+    await guardarDatosFirebase();
     inicializarDatos();
   }
 }
@@ -1651,7 +1699,10 @@ function actualizarCalculos() {
   let eficiencia = totalVentas > 0 ? Math.round((totalGastos / totalVentas) * 100) : 0;
   document.getElementById('an-eficiencia').innerText = eficiencia + '%';
 
-  document.getElementById('informe-texto').innerText = `En este periodo se registran ingresos totales de $${totalVentas.toLocaleString()} frente a egresos consolidados de $${totalGastos.toLocaleString()}. El rendimiento demuestra una tasa de eficiencia del gasto del ${eficiencia}%.`;
+  document.getElementById('informe-texto').innerText =
+   `En este periodo se registran ingresos totales de $${totalVentas.toLocaleString()} 
+   frente a egresos consolidados de $${totalGastos.toLocaleString()}. El rendimiento demuestra una tasa de eficiencia del gasto del
+    ${eficiencia}%.`;
 
   renderGraficas(totalVentas, totalGastos);
 }
@@ -1663,14 +1714,18 @@ function renderGraficas(v, g) {
   let maxVenta = Math.max(v1, v2, 1);
 
   document.getElementById('dash-vend').innerHTML = `
-    <div class="v-col"><div class="v-bar" style="height:${(v1/maxVenta)*100}%"><span class="v-val">$${v1.toLocaleString()}</span></div><span class="v-lbl">Yuliana</span></div>
-    <div class="v-col"><div class="v-bar" style="height:${(v2/maxVenta)*100}%"><span class="v-bar-group"><span class="v-val">$${v2.toLocaleString()}</span></span></div><span class="v-lbl">Juan</span></div>
+    <div class="v-col"><div class="v-bar" style="height:${(v1/maxVenta)*100}%"><span class="v-val">$${v1.toLocaleString()}</span></div>
+    <span class="v-lbl">Yuliana</span></div>
+    <div class="v-col"><div class="v-bar" style="height:${(v2/maxVenta)*100}%">
+      <span class="v-bar-group"><span class="v-val">$${v2.toLocaleString()}</span></span></div><span class="v-lbl">Juan</span></div>
   `;
 
   let maxFin = Math.max(v, g, 1);
   document.getElementById('dash-financiero').innerHTML = `
-    <div class="v-col"><div class="v-bar" style="height:${(v/maxFin)*100}%; background:var(--g)"><span class="v-val">$${v.toLocaleString()}</span></div><span class="v-lbl">Ingresos</span></div>
-    <div class="v-col"><div class="v-bar" style="height:${(g/maxFin)*100}%; background:var(--red)"><span class="v-val">$${g.toLocaleString()}</span></div><span class="v-lbl">Gastos</span></div>
+    <div class="v-col"><div class="v-bar" style="height:${(v/maxFin)*100}%;
+       background:var(--g)"><span class="v-val">$${v.toLocaleString()}</span></div><span class="v-lbl">Ingresos</span></div>
+    <div class="v-col"><div class="v-bar" style="height:${(g/maxFin)*100}%;
+       background:var(--red)"><span class="v-val">$${g.toLocaleString()}</span></div><span class="v-lbl">Gastos</span></div>
   `;
 }
 
@@ -1834,7 +1889,10 @@ async function cargarDatosFirebase() {
  console.log("Datos enviados a Firebase");
 
 </script>
+
 <script type="module">
+
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import {
